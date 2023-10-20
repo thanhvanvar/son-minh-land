@@ -1,0 +1,10 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/lien-he": "pages/lien-he.js",
+  "/tin-tuc": "pages/tin-tuc.js",
+  "/ve-chung-toi": "pages/ve-chung-toi.js",
+  "/du-an": "pages/du-an.js",
+  "/": "pages/index.js"
+}
