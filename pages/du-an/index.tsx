@@ -5,6 +5,7 @@ import IntroPage from "@/components/IntroPage";
 import Menu from "@/components/Menu";
 import { Image, Divider, Card, CardHeader, CardBody } from "@nextui-org/react";
 import queryString from "query-string";
+
 export default function Project() {
   const router = useRouter();
   let searchParams = new URLSearchParams(
@@ -53,7 +54,16 @@ export default function Project() {
                     />
                   </CardHeader>
                   <CardBody className="overflow-visible py-2">
-                    <h4 className="font-bold text-large">{row.name_vn}</h4>
+                    <h4
+                      className="font-bold text-large cursor-pointer"
+                      onClick={() =>
+                        router.push(`/du-an/${row.keyword}/${row.id}`, undefined, {
+                          shallow: true,
+                        })
+                      }
+                    >
+                      {row.name_vn}
+                    </h4>
                     {/* <small className="text-default-500">{row.date_added}</small> */}
                     <p className="text-sm line-clamp-1">{row.diachi_vn}</p>
                   </CardBody>

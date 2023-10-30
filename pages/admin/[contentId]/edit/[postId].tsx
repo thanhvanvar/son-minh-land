@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSession } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import queryString from "query-string";
 import MenuSidebar from "../../MenuSidebar";
+import * as Icon from "react-bootstrap-icons";
 import {
   Input,
   Image,
@@ -10,7 +11,7 @@ import {
   Tabs,
   Tab,
   Card,
-  CardBody,
+  Avatar,
 } from "@nextui-org/react";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
@@ -21,26 +22,32 @@ import {
   themeSelect,
   toastInfo,
 } from "../../../../lib/FtGeneral";
-import {ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { supabase } from "../../../../lib/supabaseClient";
 import Login from "../../user/Login";
 import Header from "../../components/Header";
 const { v4: uuidv4 } = require("uuid");
 
-
 export default function About() {
   const session = useSession();
   const router = useRouter();
+  // const inputFile = useRef<HTMLDivElement>(null);
+  const inputFile = useRef<HTMLInputElement | null>(null);
+  const [imgAvatar, setImgAvatar] = useState("/user-noimage.png");
+  const [ImgNameSlide, setImgNameSlide] = useState([]);
+  const [imgSlide, setImgSlide] = useState([]);
 
   const [project, setProject]: any = useState([]);
   const [id, setID] = useState("");
   const [name, setName] = useState("");
   const [diachi, setDiaChi] = useState("");
   const [info, setInfo] = useState("");
+  const [img, setImg] = useState("");
   const [tongquan, setTongQuan] = useState("");
   const [vitri, setViTri] = useState("");
   const [tienich, setTienIch] = useState("");
+  const [matbang, setMatBang] = useState("");
   const [tiendo, setTienDo] = useState("");
   const [pttt, setPTTT] = useState("");
 
@@ -109,7 +116,14 @@ export default function About() {
           setName(data.name_vn);
           setDiaChi(data.diachi_vn);
           setInfo(data.info_vn);
+          setImg(data.img);
+          setImgAvatar(data.img);
           setTongQuan(data.tongquan_vn);
+          setViTri(data.vitri_vn)
+          setTienIch(data.tienich_vn)
+          setMatBang(data.matbang_vn)
+          setTienDo(data.tiendo_vn)
+          setPTTT(data.pttt_vn)
           console.log(data);
         });
     }
@@ -140,12 +154,12 @@ export default function About() {
   }
   const handleSubmit = (event: any) => {
     event.preventDefault();
-console.log(event.target.name)
-    if (name == '') {
+    console.log(event.target.name);
+    if (name == "") {
       toastError("Vui lòng điền tên dự án...");
       return false;
     }
-    if (diachi == '') {
+    if (diachi == "") {
       toastError("Vui lòng điền tên dự án...");
       return false;
     }
@@ -155,7 +169,15 @@ console.log(event.target.name)
       name_vn: name,
       diachi_vn: diachi,
       info_vn: info,
+      img: img,
       tongquan_vn: tongquan,
+      vitri_vn: vitri,
+      tienich_vn: tienich,
+      matbang_vn: matbang,
+      tiendo_vn: tiendo,
+      pttt_vn: pttt,
+      active: "1",
+      deleted: "0",
     };
     if (router.query.postId != "0") {
       console.log(ojb);
@@ -168,6 +190,49 @@ console.log(event.target.name)
       insertDataTinRao(ojb);
       router.push(`/cms/tin-da-dang`, undefined, { shallow: true });
     }
+  };
+
+  async function uploadImage(e:any) {
+    let file = e.target.files;
+    for (let i = 0; i < file.length; i++) {
+      let checkFile = true;
+      if (e.target.files[i].size > 5000 * 1024) {
+        toastError(`Hình ${e.target.files[i].name} không được quá 5 MB`);
+        checkFile = false;
+      }
+      if (
+        !["jpeg", "png", "jpg", "gif"].includes(
+          e.target.files[i].type.split("/").pop()
+        )
+      ) {
+        toastError(
+          `Hình ${e.target.files[i].name} không đúng định dạng, định dạng đúng 'jpeg','png','jpg','gif' `
+        );
+        checkFile = false;
+      }
+      if (checkFile) {
+        let file2 = e.target.files[i];
+        const { data, error } = await supabase.storage
+          .from("project_image")
+          .upload(uuidv4(), file2);
+        if (data) {
+          // setImgSlide(oldMessages => [data.path, ...oldMessages])
+          console.log(data);
+          setImg(
+            `https://vyjeeoqetducftdoemqr.supabase.co/storage/v1/object/public/project_image/${data.path}`
+          );
+        } else {
+          console.log(error);
+        }
+      }
+    }
+  }
+  const handleClickImg = () => {
+    // `current` points to the mounted file input element
+    if(inputFile.current) {
+      // will be type HTMLDivElement NOT HTMLDivElement | null
+      inputFile.current.click();
+  }
   };
 
   return (
@@ -227,12 +292,41 @@ console.log(event.target.name)
                             </div>
                             <div className={`col-span-12`}>
                               <p className="font-bold text-sm">Hình đại diện</p>
-                              <Image
-                                isBlurred
-                                width={240}
-                                src="https://nextui-docs-v2.vercel.app/images/album-cover.png"
-                                alt="NextUI Album Cover"
-                                className="m-5"
+                              <div className={`flex flex-wrap relative`}>
+                                {/* <Avatar
+                                  src={img}
+                                  className="w-40 h-40 text-large"
+                                  onClick={handleClickImg}
+                                /> */}
+                                <Image
+                                  isBlurred
+                                  width={240}
+                                  src={img}
+                                  alt="NextUI Album Cover"
+                                  onClick={handleClickImg}
+                                  className="w-40 h-40 m-5 text-large cursor-pointer"
+                                />
+                                {img != "/user-noimage.png" ? (
+                                  <p
+                                    className={`absolute bottom-6 left-6 z-10 cursor-pointer`}
+                                    onClick={() =>
+                                      setImgAvatar("/user-noimage.png")
+                                    }
+                                  >
+                                    <Icon.XCircleFill
+                                      className={`text-2xl text-green-400 pointer-events-none`}
+                                    />
+                                  </p>
+                                ) : (
+                                  ""
+                                )}
+                              </div>
+                              <input
+                                type="file"
+                                name="myImage"
+                                ref={inputFile}
+                                onChange={(e) => uploadImage(e)}
+                                style={{ display: "none" }}
                               />
                             </div>
                             <div className={`col-span-12`}>
@@ -242,7 +336,7 @@ console.log(event.target.name)
                                 onChange={(e) => setTongQuan(e)}
                                 modules={quillModules}
                                 formats={quillFormats}
-                                className="h-[500px] bg-white"
+                                className="bg-white"
                               />
                             </div>
                           </div>
@@ -256,7 +350,7 @@ console.log(event.target.name)
                               onChange={(e) => setViTri(e)}
                               modules={quillModules}
                               formats={quillFormats}
-                              className="h-[500px] bg-white"
+                              className="bg-white"
                             />
                           </div>
                         </Tab>
@@ -269,7 +363,20 @@ console.log(event.target.name)
                               onChange={(e) => setTienIch(e)}
                               modules={quillModules}
                               formats={quillFormats}
-                              className="h-[500px]  bg-white"
+                              className="bg-white"
+                            />
+                          </div>
+                        </Tab>
+                        <Tab key="mat-bang" title="Mặt bằng">
+                          <div className={`col-span-12`}>
+                            <p className="font-bold text-sm pt-10">Mặt bằng</p>
+
+                            <QuillEditor
+                              value={matbang}
+                              onChange={(e) => setMatBang(e)}
+                              modules={quillModules}
+                              formats={quillFormats}
+                              className="bg-white"
                             />
                           </div>
                         </Tab>
@@ -281,7 +388,7 @@ console.log(event.target.name)
                               onChange={(e) => setTienDo(e)}
                               modules={quillModules}
                               formats={quillFormats}
-                              className="h-[500px] bg-white"
+                              className="g-white"
                             />
                           </div>
                         </Tab>
@@ -308,7 +415,7 @@ console.log(event.target.name)
           </div>
         </form>
       )}
-       <ToastContainer/>
+      <ToastContainer />
     </>
   );
 }

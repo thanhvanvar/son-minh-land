@@ -63,7 +63,15 @@ export default function ProjectList() {
               </TableCell>
               <TableCell>
                 <div className="relative flex items-center gap-3">
-                  <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                  <span
+                    className="text-lg text-default-400 cursor-pointer active:opacity-50"
+                    onClick={() =>
+                      window.open(`/du-an/${row.keyword}/${row.id}`, '_blank')
+                      // router.push(`/du-an/${row.keyword}/${row.id}`, undefined, {
+                      //   shallow: true
+                      // })
+                    }
+                  >
                     <Icon.EyeFill size={23} />
                   </span>
 

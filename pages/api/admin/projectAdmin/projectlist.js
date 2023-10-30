@@ -5,6 +5,7 @@ export default async function handler(req, res) {
         const { data, error, status } = await supabase
         .from('projects')
         .select(`*`)
+        .order('date_added', { ascending: false })
         if (error) {
             console.log('Error:', error.message);
         } else {

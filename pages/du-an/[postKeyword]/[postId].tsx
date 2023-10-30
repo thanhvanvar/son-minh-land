@@ -4,23 +4,26 @@ import queryString from "query-string";
 import Footer from "@/components/Footer";
 import IntroPage from "@/components/IntroPage";
 import Menu from "@/components/Menu";
-import { Image,Divider } from "@nextui-org/react";
+import { Image, Divider } from "@nextui-org/react";
 
-export default function About() {
-    const router = useRouter();
-    const [project, setProject]:any = useState([]);
-    useEffect(() => {
-        const query = {
-          id: router.query.postId,
-        };
-        const urlAPI = `/api/projects/projectDetail?${queryString.stringify(query)}`;
-        fetch(urlAPI)
-          .then((res) => res.json())
-          .then((data) => {
-            setProject(data);
-            console.log(data);
-          });
-      }, []);
+export default function ProjectDetail() {
+  const router = useRouter();
+  const [project, setProject]: any = useState([]);
+
+  useEffect(() => {
+    const query = {
+      id: router.query.postId,
+    };
+    const urlAPI = `/api/projects/projectDetail?${queryString.stringify(
+      query
+    )}`;
+    fetch(urlAPI)
+      .then((res) => res.json())
+      .then((data) => {
+        setProject(data);
+        console.log(data);
+      });
+  }, [router.query.postId]);
   return (
     <>
       <Menu />
@@ -34,7 +37,7 @@ export default function About() {
                 width="100%"
                 alt={""}
                 className="w-full object-cover h-[440px]"
-                src={"/about/15.jpg"}
+                src={project.img}
               />
             </div>
             <div className={`col-span-6`}>
@@ -44,171 +47,142 @@ export default function About() {
               <div className="md:pt-4 md:pb-8">
                 <Divider className="w-[40px] h-[5px] rounded-lg" />
               </div>
-              <div className="text-black">
-              {project.info_vn}
-              </div>
+              <div className="text-black">{project.info_vn}</div>
             </div>
           </div>
         </div>
       </div>
-      <div className="bg-[#001a57]">
-        <div className="container mx-auto md:w-[1170px] p-2 md:p-6 md:py-[100px]">
-          <div className="grid grid-cols-12 gap-4">
-            <div className={`col-span-12`}>
-              <div className="font-bold text-[28px] text-white leading-[40px] text-center">
-                TẠI SAO CHỌN CHÚNG TÔI
-              </div>
-              <div className="flex justify-center md:pt-4 md:pb-8">
-                <Divider className="w-[40px] h-[5px] bg-white rounded-lg" />
-              </div>
-            </div>
-            <div className={`col-span-12`}>
-              <div className="grid grid-cols-12 gap-4">
-                <div className={`col-span-4`}>
-                  <div className="grid grid-cols-12 gap-4">
-                    <div className={`col-span-12`}>
-                      <div className="text-[22px] text-white font-bold text-center">
-                        Chiến lược tốt nhất
-                      </div>
-                    </div>
-                    <div className={`col-span-12`}>
-                      <div className="text-center text-white">
-                        Họ khám phá những thế giới mới lạ để tìm kiếm cuộc sống
-                        mới và những nền văn minh mới một cách táo bạo ở những
-                        nơi mà trước đây chưa có con người nào đặt chân tới.
-                      </div>
-                    </div>
-                  </div>
+
+      {project.tongquan_vn ? (
+        <div className="bg-[#ffffff]">
+          <div className="container mx-auto md:w-[1170px] p-2 md:p-6 md:py-[50px]">
+            <div className="grid grid-cols-12 gap-4">
+              <div className={`col-span-12`}>
+                <div className="font-bold text-[28px] uppercase leading-[40px] text-center">
+                  Tổng Quan
                 </div>
-                <div className={`col-span-4`}>
-                  <div className="grid grid-cols-12 gap-4">
-                    <div className={`col-span-12`}>
-                      <div className="text-[22px] text-white font-bold text-center">
-                        Dịch vụ chất lượng cao
-                      </div>
-                    </div>
-                    <div className={`col-span-12`}>
-                      <div className="text-center text-white">
-                        Họ khám phá những thế giới mới lạ để tìm kiếm cuộc sống
-                        mới và những nền văn minh mới một cách táo bạo ở những
-                        nơi mà trước đây chưa có con người nào đặt chân tới.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className={`col-span-4`}>
-                  <div className="grid grid-cols-12 gap-4">
-                    <div className={`col-span-12`}>
-                      <div className="text-[22px] text-white font-bold text-center">
-                        Hỗ trợ thân thiện
-                      </div>
-                    </div>
-                    <div className={`col-span-12`}>
-                      <div className="text-center text-white">
-                        Họ khám phá những thế giới mới lạ để tìm kiếm cuộc sống
-                        mới và những nền văn minh mới một cách táo bạo ở những
-                        nơi mà trước đây chưa có con người nào đặt chân tới.
-                      </div>
-                    </div>
-                  </div>
+                <div className="flex justify-center md:pt-4 md:pb-8">
+                  <Divider className="w-[40px] h-[5px] bg-black rounded-lg" />
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="bg-[#ffffff]">
-        <div className="container mx-auto md:w-[1170px] p-2 md:p-6 ">
-          <div className="grid grid-cols-12 gap-8">
-            <div className={`col-span-6`}>
-              <Image
-                shadow="sm"
-                radius="lg"
-                width="100%"
-                alt={""}
-                className="w-full object-cover h-[440px]"
-                src={"/about/16.jpg"}
-              />
-            </div>
-            <div className={`col-span-6`}>
-              <div className="font-bold text-3xl leading-[40px] text-black">
-               Tầm nhìn
-              </div>
-              <div className="md:pt-4 md:pb-8">
-                <Divider className="w-[40px] h-[5px] rounded-lg" />
-              </div>
-              <div className="text-black">
-                Câu chuyện về chuyến đi định mệnh bắt đầu từ cảng nhiệt đới này
-                trên con tàu nhỏ bé này ngày nay vẫn được chính phủ mong muốn họ
-                sống sót với tư cách là những người lính may mắn để từng khám
-                phá phía đông để đến một căn hộ sang trọng.
+              <div className={`col-span-12`}>
+                <div
+                  dangerouslySetInnerHTML={{ __html: project.tongquan_vn }}
+                />
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="bg-[#ffffff]">
-        <div className="container mx-auto md:w-[1170px] p-2 md:p-6 ">
-          <div className="grid grid-cols-12 gap-8">
-            
-            <div className={`col-span-6`}>
-              <div className="font-bold text-3xl leading-[40px] text-black text-end">
-                Sứ mệnh
+      ) : (
+        ""
+      )}
+      {project.vitri_vn ? (
+        <div className="bg-[#ffffff]">
+          <div className="container mx-auto md:w-[1170px] p-2 md:p-6 md:py-[50px]">
+            <div className="grid grid-cols-12 gap-4">
+              <div className={`col-span-12`}>
+                <div className="font-bold text-[28px] uppercase leading-[40px] text-center">
+                  vị trí
+                </div>
+                <div className="flex justify-center md:pt-4 md:pb-8">
+                  <Divider className="w-[40px] h-[5px] bg-black rounded-lg" />
+                </div>
               </div>
-              <div className="md:pt-4 md:pb-8  flex justify-end">
-                <Divider className="w-[40px] h-[5px] rounded-lg" />
-              </div>
-              <div className="text-black text-end">
-                Câu chuyện về chuyến đi định mệnh bắt đầu từ cảng nhiệt đới này
-                trên con tàu nhỏ bé này ngày nay vẫn được chính phủ mong muốn họ
-                sống sót với tư cách là những người lính may mắn để từng khám
-                phá phía đông để đến một căn hộ sang trọng.
-              </div>
-            </div>
-            <div className={`col-span-6`}>
-              <Image
-                shadow="sm"
-                radius="lg"
-                width="100%"
-                alt={""}
-                className="w-full object-cover h-[440px]"
-                src={"/about/18.jpg"}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="bg-[#ffffff]">
-        <div className="container mx-auto md:w-[1170px] p-2 md:p-6 ">
-          <div className="grid grid-cols-12 gap-8">
-            <div className={`col-span-6`}>
-              <Image
-                shadow="sm"
-                radius="lg"
-                width="100%"
-                alt={""}
-                className="w-full object-cover h-[440px]"
-                src={"/about/19.jpg"}
-              />
-            </div>
-            <div className={`col-span-6`}>
-              <div className="font-bold text-3xl leading-[40px] text-black">
-                Giá trị cốt lõi
-              </div>
-              <div className="md:pt-4 md:pb-8">
-                <Divider className="w-[40px] h-[5px] rounded-lg" />
-              </div>
-              <div className="text-black">
-                Câu chuyện về chuyến đi định mệnh bắt đầu từ cảng nhiệt đới này
-                trên con tàu nhỏ bé này ngày nay vẫn được chính phủ mong muốn họ
-                sống sót với tư cách là những người lính may mắn để từng khám
-                phá phía đông để đến một căn hộ sang trọng.
+              <div className={`col-span-12`}>
+                <div dangerouslySetInnerHTML={{ __html: project.vitri_vn }} />
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <Footer/>
+      ) : (
+        ""
+      )}
+      {project.tienich_vn ? (
+        <div className="bg-[#ffffff]">
+          <div className="container mx-auto md:w-[1170px] p-2 md:p-6 md:py-[50px]">
+            <div className="grid grid-cols-12 gap-4">
+              <div className={`col-span-12`}>
+                <div className="font-bold text-[28px] uppercase leading-[40px] text-center">
+                  tiện ích
+                </div>
+                <div className="flex justify-center md:pt-4 md:pb-8">
+                  <Divider className="w-[40px] h-[5px] bg-black rounded-lg" />
+                </div>
+              </div>
+              <div className={`col-span-12`}>
+                <div dangerouslySetInnerHTML={{ __html: project.tienich_vn }} />
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+      {project.matbang_vn ? (
+        <div className="bg-[#ffffff]">
+          <div className="container mx-auto md:w-[1170px] p-2 md:p-6 md:py-[50px]">
+            <div className="grid grid-cols-12 gap-4">
+              <div className={`col-span-12`}>
+                <div className="font-bold text-[28px] uppercase leading-[40px] text-center">
+                  mặt bằng
+                </div>
+                <div className="flex justify-center md:pt-4 md:pb-8">
+                  <Divider className="w-[40px] h-[5px] bg-black rounded-lg" />
+                </div>
+              </div>
+              <div className={`col-span-12`}>
+                <div dangerouslySetInnerHTML={{ __html: project.matbang_vn }} />
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+      {project.tiendo_vn ? (
+        <div className="bg-[#ffffff]">
+          <div className="container mx-auto md:w-[1170px] p-2 md:p-6 md:py-[50px]">
+            <div className="grid grid-cols-12 gap-4">
+              <div className={`col-span-12`}>
+                <div className="font-bold text-[28px] uppercase leading-[40px] text-center">
+                  tiến độ
+                </div>
+                <div className="flex justify-center md:pt-4 md:pb-8">
+                  <Divider className="w-[40px] h-[5px] bg-black rounded-lg" />
+                </div>
+              </div>
+              <div className={`col-span-12`}>
+                <div dangerouslySetInnerHTML={{ __html: project.tiendo_vn }} />
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+      {project.pttt_vn ? (
+        <div className="bg-[#ffffff]">
+          <div className="container mx-auto md:w-[1170px] p-2 md:p-6 md:py-[50px]">
+            <div className="grid grid-cols-12 gap-4">
+              <div className={`col-span-12`}>
+                <div className="font-bold text-[28px] uppercase leading-[40px] text-center">
+                  PT Thanh toán
+                </div>
+                <div className="flex justify-center md:pt-4 md:pb-8">
+                  <Divider className="w-[40px] h-[5px] bg-black rounded-lg" />
+                </div>
+              </div>
+              <div className={`col-span-12`}>
+                <div dangerouslySetInnerHTML={{ __html: project.pttt_vn }} />
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+
+      <Footer />
     </>
   );
 }
