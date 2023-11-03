@@ -9,7 +9,6 @@ export default function HeaderAdmin() {
     typeof window !== "undefined" ? window.location.search : ""
   );
   const [Title, setTile] = useState("");
-  console.log(router);
   useEffect(() => {
     if (router.query.contentId == "project") {
       setTile("Dự án");

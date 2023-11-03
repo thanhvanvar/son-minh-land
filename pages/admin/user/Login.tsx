@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 export default function Login() {
   const supabase = useSupabaseClient();
+  
   return (
     <>
       <div className="container mx-auto md:w-[1170px] p-2 md:p-6 justify-center ">
@@ -39,14 +40,14 @@ export default function Login() {
                       loading_button_label: "Đăng ký...",
                     },
                     magic_link: {
-                        link_text:'Đã có tài khoản? Đăng nhập'
+                      link_text: "Đã có tài khoản? Đăng nhập",
                     },
                     forgotten_password: {
                       email_label: "Email",
                       password_label: "Mật khẩu",
                       email_input_placeholder: "Địa chỉ email của bạn",
                       button_label: "Đặt lại mật khẩu",
-                    //   link_text: "Quên mật khẩu?",
+                      //   link_text: "Quên mật khẩu?",
                     },
                   },
                 }}

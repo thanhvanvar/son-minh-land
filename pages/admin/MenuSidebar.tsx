@@ -1,57 +1,57 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Divider, Accordion, AccordionItem } from "@nextui-org/react";
+import { supabase } from "../../lib/supabaseClient";
+import { Auth } from "@supabase/auth-ui-react";
+import { ThemeSupa } from "@supabase/auth-ui-shared";
+import { useSupabaseClient, useSession } from "@supabase/auth-helpers-react";
+
+import { Divider, Accordion, AccordionItem, User } from "@nextui-org/react";
 import * as Icon from "react-bootstrap-icons";
+import { deleteCookie, getCookie, hasCookie } from "cookies-next";
+import queryString from "query-string";
 
 export default function MenuSidebar() {
   const router = useRouter();
+  const session = useSession();
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const handleLogout = () => {
+    deleteCookie("sb-vyjeeoqetducftdoemqr-auth-token");
+    supabase.auth.signOut();
+  };
+  useEffect(() => {
+    if (session) {
+      const query = {
+        id: session.user.id,
+      };
+      const urlAPI = `/api/admin/user/profileDetail?${queryString.stringify(
+        query
+      )}`;
+      fetch(urlAPI)
+        .then((res) => res.json())
+        .then((data) => {
+          setUserName(data.full_name);
+          setUserEmail(data.email);
+        });
+    }
+  }, []);
   return (
     <>
+      <User
+        name={userName}
+        description={userEmail}
+        avatarProps={{
+          src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+        }}
+      />
       <Accordion
         selectionMode="multiple"
         variant="bordered"
         defaultExpandedKeys={["1", "2", "3"]}
       >
-        <AccordionItem key="1" aria-label="Quản lý" title="Quản lý">
+        <AccordionItem key="2" aria-label="Quản lý" title="Quản lý">
           <Divider />
-          {/* <div
-            className="flex gap-3 p-3 items-center justify-between cursor-pointer hover:bg-gray-100"
-            onClick={() =>
-              router.push("/trang-ca-nhan/dang-tin", undefined, {
-                shallow: true,
-              })
-            }
-          >
-            <div className="flex items-center text-base">
-              <div className="font-bold pr-2">
-                <Icon.PencilSquare size={20} />
-              </div>
-              <div>Đăng tin mới</div>
-            </div>
-            <div className="">
-              <Icon.CaretRightFill size={13} />
-            </div>
-          </div>
-          <Divider /> */}
-          {/* <div
-            className="flex gap-3 p-3 items-center justify-between cursor-pointer hover:bg-gray-100"
-            onClick={() =>
-              router.push("/trang-ca-nhan?sta=tin-da-dang", undefined, {
-                shallow: true,
-              })
-            }
-          >
-            <div className="flex items-center text-base">
-              <div className="font-bold pr-2">
-                <Icon.PatchCheck size={20} />
-              </div>
-              <div>Đã đăng</div>
-            </div>
-            <div className="">
-              <Icon.CaretRightFill size={13} />
-            </div>
-          </div>
-          <Divider /> */}
+
           <div
             className="flex gap-3 p-3 items-center justify-between cursor-pointer hover:bg-gray-100"
             onClick={() =>
@@ -90,6 +90,7 @@ export default function MenuSidebar() {
             </div>
           </div>
         </AccordionItem>
+
         {/* <AccordionItem
           key="2"
           aria-label="Quản lý tài khoản"
@@ -135,6 +136,17 @@ export default function MenuSidebar() {
           </div>
         </AccordionItem> */}
       </Accordion>
+      <div
+        className="flex gap-3 p-3 items-center justify-between cursor-pointer hover:bg-gray-100"
+        onClick={() => handleLogout()}
+      >
+        <div className="flex items-center text-base">
+          <div>Đăng xuất</div>
+        </div>
+        <div className="">
+          <Icon.CaretRightFill size={13} />
+        </div>
+      </div>
     </>
   );
 }

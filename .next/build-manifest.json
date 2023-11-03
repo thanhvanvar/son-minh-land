@@ -27,30 +27,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin/[contentId]": [
+    "/admin/[contentId]/edit/[postId]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/admin/[contentId].js"
+      "static/chunks/pages/admin/[contentId]/edit/[postId].js"
     ],
     "/du-an": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/du-an.js"
-    ],
-    "/du-an/[postKeyword]/[postId]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/du-an/[postKeyword]/[postId].js"
-    ],
-    "/tin-tuc": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/tin-tuc.js"
-    ],
-    "/ve-chung-toi": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/ve-chung-toi.js"
     ]
   },
   "ampFirstPages": []

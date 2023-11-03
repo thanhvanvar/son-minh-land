@@ -1,4 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
+import ReactDOM from "react-dom";
+const { convert } = require("html-to-text");
 import { useSession } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import queryString from "query-string";
@@ -13,9 +15,6 @@ import {
   Card,
   Avatar,
 } from "@nextui-org/react";
-import dynamic from "next/dynamic";
-import "react-quill/dist/quill.snow.css"; // Import Quill styles
-const QuillEditor = dynamic(() => import("react-quill"), { ssr: false });
 import {
   toastError,
   toastSuccess,
@@ -28,13 +27,13 @@ import { supabase } from "../../../../lib/supabaseClient";
 import Login from "../../user/Login";
 import Header from "../../components/Header";
 const { v4: uuidv4 } = require("uuid");
+import EditorTiny from "../../components/editor/EditorTiny";
 
 export default function About() {
   const session = useSession();
   const router = useRouter();
-  // const inputFile = useRef<HTMLDivElement>(null);
   const inputFile = useRef<HTMLInputElement | null>(null);
-  const [imgAvatar, setImgAvatar] = useState("/user-noimage.png");
+
   const [ImgNameSlide, setImgNameSlide] = useState([]);
   const [imgSlide, setImgSlide] = useState([]);
 
@@ -50,56 +49,6 @@ export default function About() {
   const [matbang, setMatBang] = useState("");
   const [tiendo, setTienDo] = useState("");
   const [pttt, setPTTT] = useState("");
-
-  const quillModules = {
-    toolbar: [
-      [{ header: [1, 2, 3, false] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [{ list: "ordered" }, { list: "bullet" }],
-      ["link", "image"],
-      [{ align: [] }],
-      [{ color: [] }],
-      ["code-block"],
-      ["clean"],
-    ],
-  };
-
-  const quillFormats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "link",
-    "image",
-    "align",
-    "color",
-    "code-block",
-  ];
-
-  const handleEditorChangeTongQuan = (e: any) => {
-    console.log(tongquan);
-    setTongQuan(e);
-  };
-  const handleEditorChangeViTri = (e: any) => {
-    console.log(tongquan);
-    setTongQuan(e);
-  };
-  const handleEditorChangeTienIch = (e: any) => {
-    console.log(tongquan);
-    setTongQuan(e);
-  };
-  const handleEditorChangeTienDo = (e: any) => {
-    console.log(tongquan);
-    setTongQuan(e);
-  };
-  const handleEditorChangePTTT = (e: any) => {
-    console.log(tongquan);
-    setTongQuan(e);
-  };
 
   useEffect(() => {
     if (router.query.postId) {
@@ -117,14 +66,12 @@ export default function About() {
           setDiaChi(data.diachi_vn);
           setInfo(data.info_vn);
           setImg(data.img);
-          setImgAvatar(data.img);
           setTongQuan(data.tongquan_vn);
-          setViTri(data.vitri_vn)
-          setTienIch(data.tienich_vn)
-          setMatBang(data.matbang_vn)
-          setTienDo(data.tiendo_vn)
-          setPTTT(data.pttt_vn)
-          console.log(data);
+          setViTri(data.vitri_vn);
+          setTienIch(data.tienich_vn);
+          setMatBang(data.matbang_vn);
+          setTienDo(data.tiendo_vn);
+          setPTTT(data.pttt_vn);
         });
     }
   }, [router.query.postId]);
@@ -192,7 +139,8 @@ export default function About() {
     }
   };
 
-  async function uploadImage(e:any) {
+  async function uploadImage(e: any) {
+    console.log(e);
     let file = e.target.files;
     for (let i = 0; i < file.length; i++) {
       let checkFile = true;
@@ -212,6 +160,7 @@ export default function About() {
       }
       if (checkFile) {
         let file2 = e.target.files[i];
+        console.log(file2)
         const { data, error } = await supabase.storage
           .from("project_image")
           .upload(uuidv4(), file2);
@@ -229,10 +178,10 @@ export default function About() {
   }
   const handleClickImg = () => {
     // `current` points to the mounted file input element
-    if(inputFile.current) {
+    if (inputFile.current) {
       // will be type HTMLDivElement NOT HTMLDivElement | null
       inputFile.current.click();
-  }
+    }
   };
 
   return (
@@ -252,7 +201,7 @@ export default function About() {
                   <div className={`col-span-12`}>
                     <div className="flex w-full flex-col">
                       <Tabs aria-label="Options">
-                        <Tab key="tong-quan" title="Tổng quan">
+                        <Tab key="thong-tin-chung" title="Thông tin chung">
                           <div className="grid grid-cols-12 gap-5">
                             <div className={`col-span-12`}>
                               <Input
@@ -309,9 +258,7 @@ export default function About() {
                                 {img != "/user-noimage.png" ? (
                                   <p
                                     className={`absolute bottom-6 left-6 z-10 cursor-pointer`}
-                                    onClick={() =>
-                                      setImgAvatar("/user-noimage.png")
-                                    }
+                                    onClick={() => setImg("/user-noimage.png")}
                                   >
                                     <Icon.XCircleFill
                                       className={`text-2xl text-green-400 pointer-events-none`}
@@ -329,80 +276,68 @@ export default function About() {
                                 style={{ display: "none" }}
                               />
                             </div>
+                          </div>
+                        </Tab>
+                        <Tab key="tong-quan" title="Tổng quan">
+                          <div className="grid grid-cols-12 gap-5">
                             <div className={`col-span-12`}>
-                              <p className="font-bold text-sm">Tổng quan</p>
-                              <QuillEditor
+                              <p className="font-bold text-base py-5">
+                                Tổng quan
+                              </p>
+                              {/* <EditorTiny
                                 value={tongquan}
-                                onChange={(e) => setTongQuan(e)}
-                                modules={quillModules}
-                                formats={quillFormats}
-                                className="bg-white"
-                              />
+                                onEditorChange={(e: any) => setTongQuan(e)}
+                              /> */}
                             </div>
                           </div>
                         </Tab>
                         <Tab key="vi-tri" title="Vị trí">
                           <div className={`col-span-12`}>
-                            <p className="font-bold text-sm pt-10">Vị trí</p>
+                            <p className="font-bold text-base py-5">Vị trí</p>
 
-                            <QuillEditor
+                            <EditorTiny
                               value={vitri}
-                              onChange={(e) => setViTri(e)}
-                              modules={quillModules}
-                              formats={quillFormats}
-                              className="bg-white"
+                              onChange={(e: any) => setViTri(e)}
                             />
                           </div>
                         </Tab>
                         <Tab key="tien-ich" title="Tiện ích">
                           <div className={`col-span-12`}>
-                            <p className="font-bold text-sm pt-10">Tiện ích</p>
+                            <p className="font-bold text-base py-5">Tiện ích</p>
 
-                            <QuillEditor
+                            <EditorTiny
                               value={tienich}
-                              onChange={(e) => setTienIch(e)}
-                              modules={quillModules}
-                              formats={quillFormats}
-                              className="bg-white"
+                              onChange={(e: any) => setTienIch(e)}
                             />
                           </div>
                         </Tab>
                         <Tab key="mat-bang" title="Mặt bằng">
                           <div className={`col-span-12`}>
-                            <p className="font-bold text-sm pt-10">Mặt bằng</p>
+                            <p className="font-bold text-base py-5">Mặt bằng</p>
 
-                            <QuillEditor
+                            {/* <EditorTiny
                               value={matbang}
-                              onChange={(e) => setMatBang(e)}
-                              modules={quillModules}
-                              formats={quillFormats}
-                              className="bg-white"
-                            />
+                              onChange={(e: any) => setMatBang(e)}
+                            /> */}
                           </div>
                         </Tab>
                         <Tab key="tien-do" title="Tiến độ">
                           <div className={`col-span-12`}>
-                            <p className="font-bold text-sm pt-10">Tiến độ</p>
-                            <QuillEditor
+                            <p className="font-bold text-base py-5">Tiến độ</p>
+                            <EditorTiny
                               value={tiendo}
-                              onChange={(e) => setTienDo(e)}
-                              modules={quillModules}
-                              formats={quillFormats}
-                              className="g-white"
+                              onChange={(e: any) => setTienDo(e)}
                             />
                           </div>
                         </Tab>
                         <Tab key="pttt" title="PTTT">
                           <div className={`col-span-12`}>
-                            <p className="font-bold text-sm pt-10">
+                            <p className="font-bold text-base py-5">
                               Phương thức thanh toán
                             </p>
-                            <QuillEditor
+                            <EditorTiny
                               value={pttt}
-                              onChange={(e) => setPTTT(e)}
-                              modules={quillModules}
-                              formats={quillFormats}
-                              className="bg-white"
+                              onChange={(e: any) => setPTTT(e)}
                             />
                           </div>
                         </Tab>
