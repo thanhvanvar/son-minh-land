@@ -37,7 +37,7 @@ export default function Menu() {
           </Link>
         </NavbarItem>
       </NavbarContent>
-      <NavbarContent justify="end">
+      {/* <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
           <Link href="#">Login</Link>
         </NavbarItem>
@@ -46,7 +46,7 @@ export default function Menu() {
             Sign Up
           </Button>
         </NavbarItem>
-      </NavbarContent>
+      </NavbarContent> */}
     </Navbar>
   );
 }

@@ -4,7 +4,8 @@ const { v4: uuidv4 } = require("uuid");
 import { Editor } from "@tinymce/tinymce-react";
 
 export default function EditorTiny(props: any) {
-  const uploadToSupabase = async (file:any) => {
+  const uploadToSupabase = async (file: any) => {
+    console.log(file);
     try {
       const { data, error } = await supabase.storage
         .from("project_image")
@@ -21,21 +22,21 @@ export default function EditorTiny(props: any) {
       return null;
     }
   };
-  function dataURItoBlob(dataURI:any) {
+  function dataURItoBlob(dataURI: any) {
     // Chuyển đổi dữ liệu base64 thành đối tượng Blob
-    const byteString = atob(dataURI.split(',')[1]);
-    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-  
+    const byteString = atob(dataURI.split(",")[1]);
+    const mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
+
     const ab = new ArrayBuffer(byteString.length);
     const ia = new Uint8Array(ab);
-  
+
     for (let i = 0; i < byteString.length; i++) {
       ia[i] = byteString.charCodeAt(i);
     }
-  
+
     return new Blob([ab], { type: mimeString });
   }
-  
+
   return (
     <>
       <Editor
@@ -64,18 +65,18 @@ export default function EditorTiny(props: any) {
             console.log(blobInfo);
             console.log(reader);
             console.log(success);
-            
+
             const formData = new FormData();
             formData.append("file", blobInfo.blob(), blobInfo.filename());
 
             reader.onload = () => {
-              const fileContent = reader.result;
-              const blob = dataURItoBlob(fileContent);
+              // const fileContent = reader.result;
+              // const blob = dataURItoBlob(fileContent);
 
-              // Tạo một đối tượng File từ đối tượng Blob (có thể thêm tên tệp nếu cần)
-              const file = new File([blob], blobInfo.filename());
-              console.log(file);
-              uploadToSupabase(file)
+              // // Tạo một đối tượng File từ đối tượng Blob (có thể thêm tên tệp nếu cần)
+              // const file = new File([blob], blobInfo.filename());
+              // console.log(file);
+              uploadToSupabase(formData)
                 .then((url) => {
                   if (url) {
                     console.log(url);

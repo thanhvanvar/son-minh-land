@@ -28,8 +28,10 @@ import Login from "../../user/Login";
 import Header from "../../components/Header";
 const { v4: uuidv4 } = require("uuid");
 import EditorTiny from "../../components/editor/EditorTiny";
+import ProjectDetailAdmin from "../../components/projects/projectDetail";
+import NewsDetailAdmin from "../../components/news/newsDetail";
 
-export default function About() {
+export default function ProjectDetail() {
   const session = useSession();
   const router = useRouter();
   const inputFile = useRef<HTMLInputElement | null>(null);
@@ -160,15 +162,15 @@ export default function About() {
       }
       if (checkFile) {
         let file2 = e.target.files[i];
-        console.log(file2)
+        console.log(file2);
         const { data, error } = await supabase.storage
-          .from("project_image")
+          .from("project_image/avatar")
           .upload(uuidv4(), file2);
         if (data) {
           // setImgSlide(oldMessages => [data.path, ...oldMessages])
           console.log(data);
           setImg(
-            `https://vyjeeoqetducftdoemqr.supabase.co/storage/v1/object/public/project_image/${data.path}`
+            `https://vyjeeoqetducftdoemqr.supabase.co/storage/v1/object/public/project_image/avatar/${data.path}`
           );
         } else {
           console.log(error);
@@ -189,166 +191,18 @@ export default function About() {
       {!session ? (
         <Login />
       ) : (
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
-          <div className="container mx-auto md:w-[1170px] p-2 md:p-6 ">
-            <div className="grid grid-cols-12 gap-8">
-              <div className={`col-span-3`}>
-                <MenuSidebar />
-              </div>
-              <div className={`col-span-9`}>
-                <Header />
-                <div className="grid grid-cols-12 gap-5">
-                  <div className={`col-span-12`}>
-                    <div className="flex w-full flex-col">
-                      <Tabs aria-label="Options">
-                        <Tab key="thong-tin-chung" title="Thông tin chung">
-                          <div className="grid grid-cols-12 gap-5">
-                            <div className={`col-span-12`}>
-                              <Input
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                type="text"
-                                variant={"flat"}
-                                label="Name"
-                                name="name"
-                                placeholder="tên dự án..."
-                                labelPlacement={"outside"}
-                              />
-                            </div>
-                            <div className={`col-span-12`}>
-                              <Input
-                                value={diachi}
-                                onChange={(e) => setDiaChi(e.target.value)}
-                                type="text"
-                                variant={"flat"}
-                                name="address"
-                                label="Address"
-                                placeholder="địa chỉ dự án..."
-                                labelPlacement={"outside"}
-                              />
-                            </div>
-                            <div className={`col-span-12`}>
-                              <Input
-                                value={info}
-                                onChange={(e) => setInfo(e.target.value)}
-                                type="text"
-                                variant={"flat"}
-                                name="info"
-                                label="Giới thiệu ngắn"
-                                placeholder="giới thiệu..."
-                                labelPlacement={"outside"}
-                              />
-                            </div>
-                            <div className={`col-span-12`}>
-                              <p className="font-bold text-sm">Hình đại diện</p>
-                              <div className={`flex flex-wrap relative`}>
-                                {/* <Avatar
-                                  src={img}
-                                  className="w-40 h-40 text-large"
-                                  onClick={handleClickImg}
-                                /> */}
-                                <Image
-                                  isBlurred
-                                  width={240}
-                                  src={img}
-                                  alt="NextUI Album Cover"
-                                  onClick={handleClickImg}
-                                  className="w-40 h-40 m-5 text-large cursor-pointer"
-                                />
-                                {img != "/user-noimage.png" ? (
-                                  <p
-                                    className={`absolute bottom-6 left-6 z-10 cursor-pointer`}
-                                    onClick={() => setImg("/user-noimage.png")}
-                                  >
-                                    <Icon.XCircleFill
-                                      className={`text-2xl text-green-400 pointer-events-none`}
-                                    />
-                                  </p>
-                                ) : (
-                                  ""
-                                )}
-                              </div>
-                              <input
-                                type="file"
-                                name="myImage"
-                                ref={inputFile}
-                                onChange={(e) => uploadImage(e)}
-                                style={{ display: "none" }}
-                              />
-                            </div>
-                          </div>
-                        </Tab>
-                        <Tab key="tong-quan" title="Tổng quan">
-                          <div className="grid grid-cols-12 gap-5">
-                            <div className={`col-span-12`}>
-                              <p className="font-bold text-base py-5">
-                                Tổng quan
-                              </p>
-                              {/* <EditorTiny
-                                value={tongquan}
-                                onEditorChange={(e: any) => setTongQuan(e)}
-                              /> */}
-                            </div>
-                          </div>
-                        </Tab>
-                        <Tab key="vi-tri" title="Vị trí">
-                          <div className={`col-span-12`}>
-                            <p className="font-bold text-base py-5">Vị trí</p>
-
-                            <EditorTiny
-                              value={vitri}
-                              onChange={(e: any) => setViTri(e)}
-                            />
-                          </div>
-                        </Tab>
-                        <Tab key="tien-ich" title="Tiện ích">
-                          <div className={`col-span-12`}>
-                            <p className="font-bold text-base py-5">Tiện ích</p>
-
-                            <EditorTiny
-                              value={tienich}
-                              onChange={(e: any) => setTienIch(e)}
-                            />
-                          </div>
-                        </Tab>
-                        <Tab key="mat-bang" title="Mặt bằng">
-                          <div className={`col-span-12`}>
-                            <p className="font-bold text-base py-5">Mặt bằng</p>
-
-                            {/* <EditorTiny
-                              value={matbang}
-                              onChange={(e: any) => setMatBang(e)}
-                            /> */}
-                          </div>
-                        </Tab>
-                        <Tab key="tien-do" title="Tiến độ">
-                          <div className={`col-span-12`}>
-                            <p className="font-bold text-base py-5">Tiến độ</p>
-                            <EditorTiny
-                              value={tiendo}
-                              onChange={(e: any) => setTienDo(e)}
-                            />
-                          </div>
-                        </Tab>
-                        <Tab key="pttt" title="PTTT">
-                          <div className={`col-span-12`}>
-                            <p className="font-bold text-base py-5">
-                              Phương thức thanh toán
-                            </p>
-                            <EditorTiny
-                              value={pttt}
-                              onChange={(e: any) => setPTTT(e)}
-                            />
-                          </div>
-                        </Tab>
-                      </Tabs>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
+        <>
+          {router.query.contentId == "project" ? (
+            <ProjectDetailAdmin />
+          ) : (
+            ""
+          )}
+          {router.query.contentId == "news" ? (
+            <NewsDetailAdmin />
+          ) : (
+            ""
+          )}
+        </>
       )}
       <ToastContainer />
     </>

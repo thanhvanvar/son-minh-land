@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Footer from "@/components/Footer";
-import IntroPage from "@/components/IntroPage";
 import Menu from "@/components/Menu";
 import { Image, Divider, Card, CardHeader, CardBody } from "@nextui-org/react";
 import queryString from "query-string";
+import NextPageLoading from "@/components/Loading/NextPageLoading";
 
 export default function Project() {
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
   let searchParams = new URLSearchParams(
     typeof window !== "undefined" ? window.location.search : ""
   );
@@ -28,6 +29,7 @@ export default function Project() {
       .then((res) => res.json())
       .then((data) => {
         setProjectList(data);
+        setLoading(false)
         console.log(data);
       });
   }, []);
@@ -35,6 +37,7 @@ export default function Project() {
   // @ts-ignore
   return (
     <>
+      {loading ? <NextPageLoading /> : ""}
       <Menu />
       <div className="container mx-auto md:w-[1170px] p-2 md:p-6 ">
         <h1 className="text-3xl font-bold uppercase">Dự án</h1>
@@ -48,8 +51,8 @@ export default function Project() {
                   <CardHeader className="p-0 flex-col items-start">
                     <Image
                       alt="Card background"
-                      className="object-cover rounded-xl h-[170px]"
-                      src="/11.jpg"
+                      className="object-cover rounded-xl h-[240px]"
+                      src={row.img}
                       width={470}
                     />
                   </CardHeader>
@@ -57,9 +60,13 @@ export default function Project() {
                     <h4
                       className="font-bold text-large cursor-pointer"
                       onClick={() =>
-                        router.push(`/du-an/${row.keyword}/${row.id}`, undefined, {
-                          shallow: true,
-                        })
+                        router.push(
+                          `/du-an/${row.keyword}/${row.id}`,
+                          undefined,
+                          {
+                            shallow: true,
+                          }
+                        )
                       }
                     >
                       {row.name_vn}

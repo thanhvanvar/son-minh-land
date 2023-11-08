@@ -19,6 +19,15 @@ export default function HeaderAdmin() {
     if (router.query.contentId == "project" && router.query.postId) {
       setTile("Chỉnh sửa dự án");
     }
+    if (router.query.contentId == "news") {
+      setTile("Tin tức");
+    }
+    if (router.asPath == "/admin/news/edit/0") {
+      setTile("Thêm tin tức");
+    }
+    if (router.query.contentId == "news" && router.query.postId) {
+      setTile("Chỉnh sửa tin tức");
+    }
   }, [router.query]);
   return (
     <>
@@ -48,14 +57,31 @@ export default function HeaderAdmin() {
               <Button
                 color="success"
                 onClick={() =>
-                  router.push(`/admin/${router.query.contentId}/edit/0`, undefined, {
-                    shallow: true,
-                  })
+                  router.push(
+                    `/admin/${router.query.contentId}/edit/0`,
+                    undefined,
+                    {
+                      shallow: true,
+                    }
+                  )
                 }
               >
                 Thêm
               </Button>
-              <Button color="danger">Xóa</Button>
+              <Button
+                color="danger"
+                onClick={() =>
+                  router.push(
+                    `/admin/${router.query.contentId}/deleted`,
+                    undefined,
+                    {
+                      shallow: true,
+                    }
+                  )
+                }
+              >
+                Xóa
+              </Button>
             </div>
           )}
         </div>

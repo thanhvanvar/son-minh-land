@@ -27,15 +27,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin/[contentId]/edit/[postId]": [
+    "/admin/[contentId]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/admin/[contentId]/edit/[postId].js"
+      "static/chunks/pages/admin/[contentId].js"
     ],
-    "/du-an": [
+    "/tin-tuc": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/du-an.js"
+      "static/chunks/pages/tin-tuc.js"
     ]
   },
   "ampFirstPages": []

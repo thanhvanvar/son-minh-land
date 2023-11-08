@@ -2,16 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import queryString from "query-string";
 import Footer from "@/components/Footer";
-import IntroPage from "@/components/IntroPage";
 import Menu from "@/components/Menu";
 import { Image, Divider } from "@nextui-org/react";
-import parse from 'html-react-parser';
-import DOMPurify from 'dompurify';
-const { convert } = require("html-to-text");
-const options = {
-  wordwrap: 130,
-  // ...
-};
+
 export default function ProjectDetail() {
   const router = useRouter();
   const [project, setProject]: any = useState([]);
@@ -72,7 +65,7 @@ export default function ProjectDetail() {
                 </div>
               </div>
               <div className={`col-span-12`}>
-                <div> {parse(DOMPurify.sanitize(project.tongquan_vn))}</div>
+                <div dangerouslySetInnerHTML={{ __html: project.tongquan_vn }} />
               </div>
             </div>
           </div>

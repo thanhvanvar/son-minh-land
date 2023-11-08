@@ -5,7 +5,13 @@ import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useSupabaseClient, useSession } from "@supabase/auth-helpers-react";
 
-import { Divider, Accordion, AccordionItem, User } from "@nextui-org/react";
+import {
+  Divider,
+  Accordion,
+  AccordionItem,
+  User,
+  Avatar,
+} from "@nextui-org/react";
 import * as Icon from "react-bootstrap-icons";
 import { deleteCookie, getCookie, hasCookie } from "cookies-next";
 import queryString from "query-string";
@@ -19,6 +25,7 @@ export default function MenuSidebar() {
     deleteCookie("sb-vyjeeoqetducftdoemqr-auth-token");
     supabase.auth.signOut();
   };
+
   useEffect(() => {
     if (session) {
       const query = {
@@ -37,18 +44,61 @@ export default function MenuSidebar() {
   }, []);
   return (
     <>
-      <User
-        name={userName}
-        description={userEmail}
-        avatarProps={{
-          src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-        }}
-      />
       <Accordion
         selectionMode="multiple"
         variant="bordered"
-        defaultExpandedKeys={["1", "2", "3"]}
+        defaultExpandedKeys={[ "2", "3"]}
       >
+        <AccordionItem
+          key="1"
+          aria-label={userName}
+          startContent={
+            <Avatar
+              isBordered
+              color="primary"
+              radius="lg"
+              src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+            />
+          }
+          subtitle={userEmail}
+          title={userName}
+        >
+          <Divider />
+          <div
+            className="flex gap-3 p-3 items-center justify-between cursor-pointer hover:bg-gray-100"
+            onClick={() =>
+              router.push("/admin/project", undefined, {
+                shallow: true,
+              })
+            }
+          >
+            <div className="flex items-center text-base">
+              <div className="font-bold pr-2">
+                <Icon.Gear size={20} />
+              </div>
+              <div>Thiết lập tài khoản</div>
+            </div>
+            <div className="">
+              <Icon.CaretRightFill size={13} />
+            </div>
+          </div>
+          <Divider />
+          <div
+            className="flex gap-3 p-3 items-center justify-between cursor-pointer hover:bg-gray-100"
+            onClick={() => handleLogout()}
+          >
+            <div className="flex items-center text-base">
+              <div className="font-bold pr-2">
+                <Icon.BoxArrowRight size={20} />
+              </div>
+              <div>Đăng xuất</div>
+            </div>
+            <div className="">
+              <Icon.CaretRightFill size={13} />
+            </div>
+          </div>
+        
+        </AccordionItem>
         <AccordionItem key="2" aria-label="Quản lý" title="Quản lý">
           <Divider />
 
@@ -136,17 +186,6 @@ export default function MenuSidebar() {
           </div>
         </AccordionItem> */}
       </Accordion>
-      <div
-        className="flex gap-3 p-3 items-center justify-between cursor-pointer hover:bg-gray-100"
-        onClick={() => handleLogout()}
-      >
-        <div className="flex items-center text-base">
-          <div>Đăng xuất</div>
-        </div>
-        <div className="">
-          <Icon.CaretRightFill size={13} />
-        </div>
-      </div>
     </>
   );
 }

@@ -20,6 +20,8 @@ import "swiper/css/pagination";
 // import required modules
 import { Pagination } from "swiper/modules";
 import Footer from "@/components/Footer";
+import SliderProjectHome from "@/components/Home/SliderProject";
+import SliderNewsHome from "@/components/Home/SliderNews";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -198,31 +200,7 @@ export default function Home() {
               </div>
             </div>
             <div className={`col-span-12`}>
-              <div className="gap-4 grid grid-cols-2 md:grid-cols-3">
-                {list.map((item, index) => (
-                  <Card
-                    shadow="sm"
-                    key={index}
-                    isPressable
-                    onPress={() => console.log("item pressed")}
-                  >
-                    <CardBody className="overflow-visible p-0">
-                      <Image
-                        shadow="sm"
-                        radius="lg"
-                        width="100%"
-                        alt={item.title}
-                        className="w-full object-cover h-[240px]"
-                        src={item.img}
-                      />
-                    </CardBody>
-                    <CardFooter className="text-small justify-between">
-                      <b>{item.title}</b>
-                      <p className="text-default-500">{item.price}</p>
-                    </CardFooter>
-                  </Card>
-                ))}
-              </div>
+              <SliderProjectHome />
             </div>
           </div>
         </div>
@@ -302,103 +280,12 @@ export default function Home() {
               </div>
             </div>
             <div className={`col-span-12`}>
-              <Swiper
-                slidesPerView={1}
-                spaceBetween={10}
-                pagination={{
-                  clickable: true,
-                }}
-                breakpoints={{
-                  640: {
-                    slidesPerView: 2,
-                    spaceBetween: 20,
-                  },
-                  768: {
-                    slidesPerView: 4,
-                    spaceBetween: 40,
-                  },
-                  1024: {
-                    slidesPerView: 3.2,
-                    spaceBetween: 20,
-                  },
-                }}
-               
-                className="mySwiper pb-3"
-              >
-                <SwiperSlide className="pb-3">
-                  <Card>
-                    <CardHeader className="p-0 flex-col items-start">
-                      <Image
-                        alt="Card background"
-                        className="object-cover rounded-xl h-[170px]"
-                        src="/11.jpg"
-                        width={470}
-                      />
-                    </CardHeader>
-                    <CardBody className="overflow-visible py-2">
-                      <h4 className="font-bold text-large">Frontend Radio</h4>
-                      <small className="text-default-500">12 Tracks</small>
-                      <p className="text-sm">Daily Mix</p>
-                    </CardBody>
-                  </Card>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <Card>
-                    <CardHeader className="p-0 flex-col items-start">
-                      <Image
-                        alt="Card background"
-                        className="object-cover rounded-xl h-[170px]"
-                        src="/11.jpg"
-                        width={470}
-                      />
-                    </CardHeader>
-                    <CardBody className="overflow-visible py-2">
-                      <h4 className="font-bold text-large">Frontend Radio</h4>
-                      <small className="text-default-500">12 Tracks</small>
-                      <p className="text-sm">Daily Mix</p>
-                    </CardBody>
-                  </Card>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <Card>
-                    <CardHeader className="p-0 flex-col items-start">
-                      <Image
-                        alt="Card background"
-                        className="object-cover rounded-xl h-[170px]"
-                        src="/11.jpg"
-                        width={470}
-                      />
-                    </CardHeader>
-                    <CardBody className="overflow-visible py-2">
-                      <h4 className="font-bold text-large">Frontend Radio</h4>
-                      <small className="text-default-500">12 Tracks</small>
-                      <p className="text-sm">Daily Mix</p>
-                    </CardBody>
-                  </Card>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <Card>
-                    <CardHeader className="p-0 flex-col items-start">
-                      <Image
-                        alt="Card background"
-                        className="object-cover rounded-xl h-[170px]"
-                        src="/11.jpg"
-                        width={470}
-                      />
-                    </CardHeader>
-                    <CardBody className="overflow-visible py-2">
-                      <h4 className="font-bold text-large">Frontend Radio</h4>
-                      <small className="text-default-500">12 Tracks</small>
-                      <p className="text-sm">Daily Mix</p>
-                    </CardBody>
-                  </Card>
-                </SwiperSlide>
-              </Swiper>
+              <SliderNewsHome />
             </div>
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }
