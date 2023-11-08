@@ -31,11 +31,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/admin/[contentId].js"
-    ],
-    "/tin-tuc": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/tin-tuc.js"
     ]
   },
   "ampFirstPages": []
