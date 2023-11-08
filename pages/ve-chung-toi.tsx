@@ -7,23 +7,23 @@ export default function About() {
     <>
       <Menu />
       <div className="bg-[#ffffff]">
-        <div className="container mx-auto md:w-[1170px] p-2 md:p-6 ">
+        <div className="container mx-auto md:w-[1170px] p-4 md:p-6 ">
           <div className="grid grid-cols-12 gap-8">
-            <div className={`col-span-6`}>
+            <div className={`md:col-span-6 col-span-12`}>
               <Image
                 shadow="sm"
                 radius="lg"
                 width="100%"
                 alt={""}
-                className="w-full object-cover h-[440px]"
+                className="w-full object-cover md:h-[440px] h-[240px]"
                 src={"/about/15.jpg"}
               />
             </div>
-            <div className={`col-span-6`}>
-              <div className="font-bold text-3xl leading-[40px] text-black">
+            <div className={`md:col-span-6 col-span-12`}>
+              <div className="font-bold md:text-3xl text-2xl leading-[40px] text-black">
                 VỀ CHÚNG TÔI
               </div>
-              <div className="md:pt-4 md:pb-8">
+              <div className="md:pt-4 md:pb-8 pt-1 pb-4">
                 <Divider className="w-[40px] h-[5px] rounded-lg" />
               </div>
               <div className="text-black">
@@ -40,16 +40,16 @@ export default function About() {
         <div className="container mx-auto md:w-[1170px] p-2 md:p-6 md:py-[100px]">
           <div className="grid grid-cols-12 gap-4">
             <div className={`col-span-12`}>
-              <div className="font-bold text-[28px] text-white leading-[40px] text-center">
+              <div className="font-bold md:text-[28px] text-2xl text-white leading-[40px] text-center">
                 TẠI SAO CHỌN CHÚNG TÔI
               </div>
-              <div className="flex justify-center md:pt-4 md:pb-8">
+              <div className="flex justify-center md:pt-4 md:pb-8 pt-1 pb-4">
                 <Divider className="w-[40px] h-[5px] bg-white rounded-lg" />
               </div>
             </div>
             <div className={`col-span-12`}>
               <div className="grid grid-cols-12 gap-4">
-                <div className={`col-span-4`}>
+                <div className={`md:col-span-4 col-span-12`}>
                   <div className="grid grid-cols-12 gap-4">
                     <div className={`col-span-12`}>
                       <div className="text-[22px] text-white font-bold text-center">
@@ -65,7 +65,7 @@ export default function About() {
                     </div>
                   </div>
                 </div>
-                <div className={`col-span-4`}>
+                <div className={`md:col-span-4 col-span-12`}>
                   <div className="grid grid-cols-12 gap-4">
                     <div className={`col-span-12`}>
                       <div className="text-[22px] text-white font-bold text-center">
@@ -81,7 +81,7 @@ export default function About() {
                     </div>
                   </div>
                 </div>
-                <div className={`col-span-4`}>
+                <div className={`md:col-span-4 col-span-12`}>
                   <div className="grid grid-cols-12 gap-4">
                     <div className={`col-span-12`}>
                       <div className="text-[22px] text-white font-bold text-center">
@@ -103,26 +103,26 @@ export default function About() {
         </div>
       </div>
       <div className="bg-[#ffffff]">
-        <div className="container mx-auto md:w-[1170px] p-2 md:p-6 ">
+        <div className="container mx-auto md:w-[1170px] p-4 md:p-6 ">
           <div className="grid grid-cols-12 gap-8">
-            <div className={`col-span-6`}>
+            <div className={`md:col-span-6 col-span-12`}>
               <Image
                 shadow="sm"
                 radius="lg"
                 width="100%"
                 alt={""}
-                className="w-full object-cover h-[440px]"
+                className="w-full object-cover md:h-[440px] h-[240px]"
                 src={"/about/16.jpg"}
               />
             </div>
-            <div className={`col-span-6`}>
-              <div className="font-bold text-3xl leading-[40px] text-black">
+            <div className={`md:col-span-6 col-span-12`}>
+              <div className="font-bold text-xl leading-[40px] text-black uppercase">
                Tầm nhìn
               </div>
-              <div className="md:pt-4 md:pb-8">
+              <div className="md:pt-4 md:pb-8 pt-1 pb-4">
                 <Divider className="w-[40px] h-[5px] rounded-lg" />
               </div>
-              <div className="text-black">
+              <div className="text-black text-base">
                 Câu chuyện về chuyến đi định mệnh bắt đầu từ cảng nhiệt đới này
                 trên con tàu nhỏ bé này ngày nay vẫn được chính phủ mong muốn họ
                 sống sót với tư cách là những người lính may mắn để từng khám
@@ -133,14 +133,14 @@ export default function About() {
         </div>
       </div>
       <div className="bg-[#ffffff]">
-        <div className="container mx-auto md:w-[1170px] p-2 md:p-6 ">
+        <div className="container mx-auto md:w-[1170px] p-4 md:p-6 ">
           <div className="grid grid-cols-12 gap-8">
             
-            <div className={`col-span-6`}>
-              <div className="font-bold text-3xl leading-[40px] text-black text-end">
+            <div className={`md:col-span-6 col-span-12`}>
+              <div className="font-bold text-xl leading-[40px] uppercase text-black text-end">
                 Sứ mệnh
               </div>
-              <div className="md:pt-4 md:pb-8  flex justify-end">
+              <div className="md:pt-4 md:pb-8 pt-1 pb-4  flex justify-end">
                 <Divider className="w-[40px] h-[5px] rounded-lg" />
               </div>
               <div className="text-black text-end">
@@ -150,13 +150,13 @@ export default function About() {
                 phá phía đông để đến một căn hộ sang trọng.
               </div>
             </div>
-            <div className={`col-span-6`}>
+            <div className={`md:col-span-6 col-span-12`}>
               <Image
                 shadow="sm"
                 radius="lg"
                 width="100%"
                 alt={""}
-                className="w-full object-cover h-[440px]"
+                className="w-full object-cover md:h-[440px] h-[240px]"
                 src={"/about/18.jpg"}
               />
             </div>
@@ -164,23 +164,23 @@ export default function About() {
         </div>
       </div>
       <div className="bg-[#ffffff]">
-        <div className="container mx-auto md:w-[1170px] p-2 md:p-6 ">
+        <div className="container mx-auto md:w-[1170px] p-4 md:p-6 ">
           <div className="grid grid-cols-12 gap-8">
-            <div className={`col-span-6`}>
+            <div className={`md:col-span-6 col-span-12`}>
               <Image
                 shadow="sm"
                 radius="lg"
                 width="100%"
                 alt={""}
-                className="w-full object-cover h-[440px]"
+                className="w-full object-cover md:h-[440px] h-[240px]"
                 src={"/about/19.jpg"}
               />
             </div>
-            <div className={`col-span-6`}>
-              <div className="font-bold text-3xl leading-[40px] text-black">
+            <div className={`md:col-span-6 col-span-12`}>
+              <div className="font-bold text-xl uppercase leading-[40px] text-black">
                 Giá trị cốt lõi
               </div>
-              <div className="md:pt-4 md:pb-8">
+              <div className="md:pt-4 md:pb-8 pt-1 pb-4">
                 <Divider className="w-[40px] h-[5px] rounded-lg" />
               </div>
               <div className="text-black">

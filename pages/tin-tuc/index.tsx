@@ -56,27 +56,27 @@ export default function Project() {
       {loading ? <NextPageLoading /> : ""}
       <Menu />
       <div className="container mx-auto md:w-[1170px] p-2 md:p-6 ">
-        <h1 className="text-3xl font-bold uppercase">tin tức</h1>
+        <h1 className="md:text-3xl text-xl font-bold uppercase">tin tức</h1>
       </div>
       <div className="bg-[#ffffff]">
         <div className="container mx-auto md:w-[1170px] p-2 md:p-6 ">
           <div className="grid grid-cols-12 gap-8">
-            <div className="col-span-8">
-              <div className="grid grid-cols-12 gap-8">
+            <div className="md:col-span-8 col-span-12">
+              <div className="grid grid-cols-12 md:gap-8 gap-5">
                 {dataList.map((row: any, index) => (
-                  <div className="col-span-6" key={index}>
+                  <div className="md:col-span-6 col-span-12" key={index}>
                     <Card>
                       <CardHeader className="p-0 flex-col items-start">
                         <Image
                           alt="Card background"
-                          className="object-cover rounded-xl h-[170px]"
+                          className="object-cover rounded-xl h-[270px]"
                           src={row.image_url}
                           width={470}
                         />
                       </CardHeader>
                       <CardBody className="overflow-visible py-2">
                         <h4
-                          className="font-bold text-large line-clamp-2 cursor-pointer"
+                          className="font-bold md:text-large text-base line-clamp-2 cursor-pointer"
                           onClick={() =>
                             router.push(
                               `/tin-tuc/${row.keyword}/${row.id}`,
@@ -102,7 +102,7 @@ export default function Project() {
               </div>
               <Pagination totalData={totalList} />
             </div>
-            <div className="col-span-4">
+            <div className="col-span-4 hidden md:block">
               <RelatedNews />
             </div>
           </div>

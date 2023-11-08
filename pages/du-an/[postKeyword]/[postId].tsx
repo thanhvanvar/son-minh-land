@@ -27,23 +27,23 @@ export default function ProjectDetail() {
     <>
       <Menu />
       <div className="bg-[#ffffff]">
-        <div className="container mx-auto md:w-[1170px] p-2 md:p-6 ">
+        <div className="container mx-auto md:w-[1170px] p-4 md:p-6 ">
           <div className="grid grid-cols-12 gap-8">
-            <div className={`col-span-6`}>
+            <div className={`md:col-span-6 col-span-12`}>
               <Image
                 shadow="sm"
                 radius="lg"
                 width="100%"
                 alt={""}
-                className="w-full object-cover h-[440px]"
+                className="w-full object-cover h-[240px]"
                 src={project.img}
               />
             </div>
-            <div className={`col-span-6`}>
-              <div className="font-bold text-3xl leading-[40px] text-black">
+            <div className={`md:col-span-6 col-span-12`}>
+              <div className="font-bold md:text-3xl text-2xl leading-[40px] text-black">
                 {project.name_vn}
               </div>
-              <div className="md:pt-4 md:pb-8">
+              <div className="md:pt-4 md:pb-8 pt-1 pb-4">
                 <Divider className="w-[40px] h-[5px] rounded-lg" />
               </div>
               <div className="text-black">{project.info_vn}</div>
@@ -54,10 +54,10 @@ export default function ProjectDetail() {
 
       {project.tongquan_vn ? (
         <div className="bg-[#ffffff]">
-          <div className="container mx-auto md:w-[1170px] p-2 md:p-6 md:py-[50px]">
+          <div className="container mx-auto md:w-[1170px] p-4 md:p-6 md:py-[50px]">
             <div className="grid grid-cols-12 gap-4">
               <div className={`col-span-12`}>
-                <div className="font-bold text-[28px] uppercase leading-[40px] text-center">
+                <div className="font-bold md:text-[28px] text-xl uppercase leading-[40px] text-center">
                   Tổng Quan
                 </div>
                 <div className="flex justify-center md:pt-4 md:pb-8">
@@ -75,10 +75,10 @@ export default function ProjectDetail() {
       )}
       {project.vitri_vn ? (
         <div className="bg-[#ffffff]">
-          <div className="container mx-auto md:w-[1170px] p-2 md:p-6 md:py-[50px]">
+          <div className="container mx-auto md:w-[1170px] p-4 md:p-6 md:py-[50px]">
             <div className="grid grid-cols-12 gap-4">
               <div className={`col-span-12`}>
-                <div className="font-bold text-[28px] uppercase leading-[40px] text-center">
+                <div className="font-bold md:text-[28px] text-xl uppercase leading-[40px] text-center">
                   vị trí
                 </div>
                 <div className="flex justify-center md:pt-4 md:pb-8">
@@ -96,10 +96,10 @@ export default function ProjectDetail() {
       )}
       {project.tienich_vn ? (
         <div className="bg-[#ffffff]">
-          <div className="container mx-auto md:w-[1170px] p-2 md:p-6 md:py-[50px]">
+          <div className="container mx-auto md:w-[1170px] p-4 md:p-6 md:py-[50px]">
             <div className="grid grid-cols-12 gap-4">
               <div className={`col-span-12`}>
-                <div className="font-bold text-[28px] uppercase leading-[40px] text-center">
+                <div className="font-bold md:text-[28px] text-xl uppercase leading-[40px] text-center">
                   tiện ích
                 </div>
                 <div className="flex justify-center md:pt-4 md:pb-8">
@@ -117,10 +117,10 @@ export default function ProjectDetail() {
       )}
       {project.matbang_vn ? (
         <div className="bg-[#ffffff]">
-          <div className="container mx-auto md:w-[1170px] p-2 md:p-6 md:py-[50px]">
+          <div className="container mx-auto md:w-[1170px] p-4 md:p-6 md:py-[50px]">
             <div className="grid grid-cols-12 gap-4">
               <div className={`col-span-12`}>
-                <div className="font-bold text-[28px] uppercase leading-[40px] text-center">
+                <div className="font-bold md:text-[28px] text-xl uppercase leading-[40px] text-center">
                   mặt bằng
                 </div>
                 <div className="flex justify-center md:pt-4 md:pb-8">
@@ -138,10 +138,10 @@ export default function ProjectDetail() {
       )}
       {project.tiendo_vn ? (
         <div className="bg-[#ffffff]">
-          <div className="container mx-auto md:w-[1170px] p-2 md:p-6 md:py-[50px]">
+          <div className="container mx-auto md:w-[1170px] p-4 md:p-6 md:py-[50px]">
             <div className="grid grid-cols-12 gap-4">
               <div className={`col-span-12`}>
-                <div className="font-bold text-[28px] uppercase leading-[40px] text-center">
+                <div className="font-bold md:text-[28px] text-xl uppercase leading-[40px] text-center">
                   tiến độ
                 </div>
                 <div className="flex justify-center md:pt-4 md:pb-8">
@@ -159,10 +159,10 @@ export default function ProjectDetail() {
       )}
       {project.pttt_vn ? (
         <div className="bg-[#ffffff]">
-          <div className="container mx-auto md:w-[1170px] p-2 md:p-6 md:py-[50px]">
+          <div className="container mx-auto md:w-[1170px] p-4 md:p-6 md:py-[50px]">
             <div className="grid grid-cols-12 gap-4">
               <div className={`col-span-12`}>
-                <div className="font-bold text-[28px] uppercase leading-[40px] text-center">
+                <div className="font-bold md:text-[28px] text-xl uppercase leading-[40px] text-center">
                   PT Thanh toán
                 </div>
                 <div className="flex justify-center md:pt-4 md:pb-8">

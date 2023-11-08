@@ -8,21 +8,21 @@ export default function Contact() {
     <>
       <Menu />
       <div className="container mx-auto md:w-[1170px] p-2 md:p-6 ">
-        <h1 className="text-3xl font-bold uppercase text-center">
+        <h1 className="md:text-3xl text-xl font-bold uppercase text-center">
           Liên hệ với chúng tôi
         </h1>
       </div>
       <div className="container mx-auto md:w-[1170px] p-2 md:p-6 ">
         <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-5">
+          <div className="md:col-span-5 col-span-12">
             <Image
               alt="Card background"
-              className="object-cover rounded-xl h-[500px]"
+              className="object-cover rounded-xl md:h-[500px] h-[400px]"
               src="/contact/22.jpg"
               width={470}
             />
           </div>
-          <div className="col-span-7">
+          <div className="md:col-span-7 col-span-12">
             <div className="grid grid-cols-12 gap-8">
               <div className="col-span-6">
                 <Input type="text" label="Tên" />
@@ -47,7 +47,7 @@ export default function Contact() {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

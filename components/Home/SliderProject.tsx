@@ -46,7 +46,7 @@ export default function SliderProjectHome() {
                 radius="lg"
                 width="100%"
                 alt={item.keyword}
-                className="w-full object-cover h-[240px]"
+                className="w-full object-cover h-[140px] md:h-[240px]"
                 src={item.img}
               />
             </CardBody>

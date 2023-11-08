@@ -64,15 +64,15 @@ export default function Home() {
       <Menu />
       <Slider />
       <div className="bg-[#001a57]">
-        <div className="container mx-auto md:w-[1170px] p-2 md:p-6 ">
+        <div className="container mx-auto md:w-[1170px] p-4 md:p-6 ">
           <div className="grid grid-cols-12 gap-4">
-            <div className={`col-span-5`}>
-              <div className="font-bold text-3xl leading-[40px] text-white ">
+            <div className={`col-span-12 md:col-span-5`}>
+              <div className="font-bold text-2xl md:text-3xl leading-[40px] text-white ">
                 Cung cấp giải pháp cho sự tăng trưởng thực tế
               </div>
             </div>
-            <div className={`col-span-7`}>
-              <div className="text-white">
+            <div className={`col-span-12 md:col-span-7`}>
+              <div className="text-white ">
                 Câu chuyện về chuyến đi định mệnh bắt đầu từ cảng nhiệt đới này
                 trên con tàu nhỏ bé này ngày nay vẫn được chính phủ mong muốn họ
                 sống sót với tư cách là những người lính may mắn để từng khám
@@ -83,10 +83,10 @@ export default function Home() {
         </div>
       </div>
       <div className="bg-[#ffffff]">
-        <div className="container mx-auto md:w-[1170px] p-2 md:p-6 md:py-[100px]">
+        <div className="container mx-auto md:w-[1170px] p-4 md:p-6 md:py-[100px]">
           <div className="grid grid-cols-12 gap-4">
             <div className={`col-span-12`}>
-              <div className="font-bold text-[28px] leading-[40px] text-center ">
+              <div className="font-bold text-2xl md:text-[28px] leading-[40px] text-center ">
                 GIẢI PHÁP CỦA CHÚNG TÔI
               </div>
               <div className="flex justify-center md:pt-4 md:pb-8">
@@ -95,7 +95,7 @@ export default function Home() {
             </div>
             <div className={`col-span-12`}>
               <div className="grid grid-cols-12 gap-4">
-                <div className={`col-span-4`}>
+                <div className={`col-span-12 md:col-span-4`}>
                   <div className="grid grid-cols-12 gap-4">
                     <div className={`col-span-12`}>
                       <div className="flex justify-center text-[52px] font-bold text-center">
@@ -116,7 +116,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <div className={`col-span-4`}>
+                <div className={`col-span-12 md:col-span-4`}>
                   <div className="grid grid-cols-12 gap-4">
                     <div className={`col-span-12`}>
                       <div className="flex justify-center text-[52px] font-bold text-center">
@@ -137,7 +137,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <div className={`col-span-4`}>
+                <div className={`col-span-12 md:col-span-4`}>
                   <div className="grid grid-cols-12 gap-4">
                     <div className={`col-span-12`}>
                       <div className="flex justify-center text-[52px] font-bold text-center">
@@ -167,10 +167,10 @@ export default function Home() {
         className="bg-no-repeat bg-center bg-gradient-to-r from-indigo-500 bg-[#001a57cc]"
         style={{ backgroundImage: "url('/11.jpg')" }}
       >
-        <div className="container mx-auto md:w-[1170px] p-2 md:p-6 md:py-[100px]">
+        <div className="container mx-auto md:w-[1170px] p-4 md:p-6 md:py-[100px]">
           <div className="grid grid-cols-12 gap-4">
             <div className={`col-span-12`}>
-              <div className="font-bold text-3xl leading-[40px] text-white md:pb-[40px]">
+              <div className="font-bold text-2xl md:text-3xl leading-[40px] text-white md:pb-[40px]">
                 VỀ CHÚNG TÔI
               </div>
               <div className="text-white">
@@ -192,7 +192,7 @@ export default function Home() {
         <div className="container mx-auto md:w-[1170px] p-2 md:p-6 md:py-[100px]">
           <div className="grid grid-cols-12 gap-4">
             <div className={`col-span-12 `}>
-              <div className="font-bold text-[38px] leading-[40px] text-center  ">
+              <div className="font-bold text-2xl md:text-[38px] leading-[40px] text-center  ">
                 DỰ ÁN
               </div>
               <div className="flex justify-center md:pt-4 md:pb-8">
@@ -206,10 +206,10 @@ export default function Home() {
         </div>
       </div>
       <div className="bg-[#001a57]">
-        <div className="container mx-auto md:w-[1170px] p-2 md:p-6 md:py-[100px]">
+        <div className="container mx-auto md:w-[1170px] p-4 md:p-6 md:py-[100px]">
           <div className="grid grid-cols-12 gap-4">
             <div className={`col-span-12`}>
-              <div className="font-bold text-[28px] text-white leading-[40px] text-center">
+              <div className="font-bold text-2xl  md:text-[28px] text-white leading-[40px] text-center">
                 TẠI SAO CHỌN CHÚNG TÔI
               </div>
               <div className="flex justify-center md:pt-4 md:pb-8">
@@ -218,7 +218,7 @@ export default function Home() {
             </div>
             <div className={`col-span-12`}>
               <div className="grid grid-cols-12 gap-4">
-                <div className={`col-span-4`}>
+                <div className={`col-span-12 md:col-span-4`}>
                   <div className="grid grid-cols-12 gap-4">
                     <div className={`col-span-12`}>
                       <div className="text-[22px] text-white font-bold text-center">
@@ -234,7 +234,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <div className={`col-span-4`}>
+                <div className={`col-span-12 md:col-span-4`}>
                   <div className="grid grid-cols-12 gap-4">
                     <div className={`col-span-12`}>
                       <div className="text-[22px] text-white font-bold text-center">
@@ -250,7 +250,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <div className={`col-span-4`}>
+                <div className={`col-span-12 md:col-span-4`}>
                   <div className="grid grid-cols-12 gap-4">
                     <div className={`col-span-12`}>
                       <div className="text-[22px] text-white font-bold text-center">
@@ -272,10 +272,10 @@ export default function Home() {
         </div>
       </div>
       <div className="bg-[#ffffff]">
-        <div className="container mx-auto md:w-[1170px] p-2 md:p-6 md:py-[100px]">
+        <div className="container mx-auto md:w-[1170px] p-4 md:p-6 md:py-[100px]">
           <div className="grid grid-cols-12 gap-4">
             <div className={`col-span-12`}>
-              <div className="font-bold text-[28px] leading-[40px] text-center md:pb-[40px]">
+              <div className="font-bold text-2xl md:text-[28px] leading-[40px] text-center md:pb-[40px]">
                 TIN MỚI NHẤT
               </div>
             </div>

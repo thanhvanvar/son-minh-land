@@ -32,7 +32,7 @@ export default function SliderNewsHome() {
       {loading ? <NextPageLoading /> : ""}
       
       <Swiper
-        slidesPerView={1}
+        slidesPerView={1.3}
         spaceBetween={10}
         pagination={{
           clickable: true,

@@ -23,7 +23,7 @@ export default () => {
           width={1980}
           alt="NextUI hero Image"
           src="/slide-1.jpg"
-          className="objet-cover w-[1900px] h-[780px]"
+          className="objet-cover w-[1900px] h-[210px] md:h-[780px]"
         />
       </SwiperSlide>
       <SwiperSlide>
@@ -31,7 +31,7 @@ export default () => {
           width={1980}
           alt="NextUI hero Image"
           src="/slide-5.jpg"
-          className="objet-cover w-[1900px] h-[780px]"
+          className="objet-cover w-[1900px] h-[210px] md:h-[780px]"
         />
       </SwiperSlide>
       <SwiperSlide>
@@ -39,7 +39,7 @@ export default () => {
           width={1980}
           alt="NextUI hero Image"
           src="/slide-3.jpg"
-          className="objet-cover w-[1900px] h-[780px]"
+          className="objet-cover w-[1900px] h-[210px] md:h-[780px]"
         />
       </SwiperSlide>
     </Swiper>

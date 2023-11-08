@@ -35,14 +35,14 @@ export default function NewsDetail() {
       <div className="bg-[#ffffff]">
         <div className="container mx-auto md:w-[1170px] p-2 md:p-6 ">
           <div className="grid grid-cols-12 gap-8">
-            <div className="col-span-8">
+            <div className="md:col-span-8 col-span-12">
               <Card>
                 <CardHeader className="p-0">
                   <Image
                     width={900}
                     src={dataList.image_url}
                     alt="NextUI Album Cover"
-                    className="object-cover w-[900px] h-[400px] text-large"
+                    className="object-cover w-[900px] md:h-[400px] h-[200px] text-large"
                   />
                 </CardHeader>
                 <CardBody>
@@ -72,7 +72,7 @@ export default function NewsDetail() {
                 </CardBody>
               </Card>
             </div>
-            <div className="col-span-4">
+            <div className="md:col-span-4 col-span-12">
               <RelatedNews />
             </div>
           </div>

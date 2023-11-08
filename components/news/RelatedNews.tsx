@@ -34,8 +34,8 @@ export default function RelatedNews() {
       <div className="grid grid-cols-12 gap-8">
         {dataList.map((row: any, index) => (
           <div className="col-span-12" key={index}>
-            <div className="grid grid-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-center justify-center">
-              <div className="relative col-span-6 md:col-span-4">
+            <div className="grid grid-cols-12 gap-6 md:gap-4 items-center justify-center">
+              <div className="relative col-span-4">
                 <Image
                   alt="Album cover"
                   className="object-cover h-[80px]"
@@ -46,7 +46,7 @@ export default function RelatedNews() {
                 />
               </div>
 
-              <div className="flex flex-col col-span-6 md:col-span-8">
+              <div className="flex flex-col col-span-8">
                 <div className="flex justify-between items-start">
                   <div className="flex flex-col gap-0">
                     <h3 className="text-base line-clamp-1">{row.title}</h3>

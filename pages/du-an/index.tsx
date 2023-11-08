@@ -40,13 +40,13 @@ export default function Project() {
       {loading ? <NextPageLoading /> : ""}
       <Menu />
       <div className="container mx-auto md:w-[1170px] p-2 md:p-6 ">
-        <h1 className="text-3xl font-bold uppercase">Dự án</h1>
+        <h1 className="md:text-3xl text-2xl font-bold uppercase">Dự án</h1>
       </div>
       <div className="bg-[#ffffff]">
         <div className="container mx-auto md:w-[1170px] p-2 md:p-6 ">
           <div className="grid grid-cols-12 gap-8">
             {projectList.map((row: any, index) => (
-              <div className="col-span-4" key={index}>
+              <div className="md:col-span-4 col-span-12" key={index}>
                 <Card>
                   <CardHeader className="p-0 flex-col items-start">
                     <Image
