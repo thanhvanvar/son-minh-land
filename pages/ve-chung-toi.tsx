@@ -1,5 +1,4 @@
 import Footer from "@/components/Footer";
-import IntroPage from "@/components/IntroPage";
 import Menu from "@/components/Menu";
 import { Image,Divider } from "@nextui-org/react";
 
