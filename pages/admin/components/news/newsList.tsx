@@ -17,48 +17,45 @@ import { toastError, toastSuccess } from "../../../../lib/FtGeneral";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Moment from "react-moment";
-import Pagination from "../Pagination";
+import Pagination from "../PaginationAdmin";
+import NextTableLoading from "@/components/Loading/NextTableLoading";
 
 export default function NewstList() {
   const router = useRouter();
-  let searchParams = new URLSearchParams(
-    typeof window !== "undefined" ? window.location.search : ""
-  );
-  const [page, setPage] = useState("");
-  const limit = "10";
-  // @ts-ignore
-
+  const tableBase = "press";
+  const urlAPI_list = "/api/admin/press_admin/presslist";
+  const urlAPI_list_total = "/api/admin/press_admin/press_total_list";
+  const [loading, setLoading] = useState(true);
+  const [changeData, setChangeData] = useState(false);
   const [infoList, setInfoList] = useState([]);
-  const [totalList, setTotalList] = useState('0');
+  const [totalList, setTotalList] = useState("0");
   useEffect(() => {
     const query = {
-      deleted: '0',
+      deleted: router.pathname == "/admin/[contentId]/deleted" ? "1" : "0",
     };
-    const urlAPI = `/api/admin/press_admin/press_total_list?${queryString.stringify(
-      query
-    )}`;
+    const urlAPI = `${urlAPI_list_total}?${queryString.stringify(query)}`;
     fetch(urlAPI)
       .then((res) => res.json())
       .then((data) => {
         setTotalList(data.length);
       });
-  },[])
+  }, []);
   useEffect(() => {
+    setLoading(true);
     const query = {
       deleted: router.asPath == "/admin/news/deleted" ? "1" : "0",
       page: router.query.pa != null ? router.query.pa : "1",
-      limit: limit,
+      limit: "10",
     };
-    const urlAPI = `/api/admin/press_admin/presslist?${queryString.stringify(
-      query
-    )}`;
+    const urlAPI = `${urlAPI_list}?${queryString.stringify(query)}`;
     fetch(urlAPI)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         setInfoList(data);
+        setLoading(false);
       });
-  }, [router]);
+  }, [router.asPath, changeData]);
 
   const handleSwitch = async (info: any) => {
     const query = {
@@ -66,7 +63,7 @@ export default function NewstList() {
       active: info.active == "1" ? "0" : "1",
     };
     const { data, error } = await supabase
-      .from("projects")
+      .from(tableBase)
       .update(query)
       .eq("id", String(query.id));
     if (error) {
@@ -83,7 +80,7 @@ export default function NewstList() {
       deleted: "1",
     };
     const { data, error } = await supabase
-      .from("projects")
+      .from(tableBase)
       .update(query)
       .eq("id", String(query.id));
     if (error) {
@@ -91,6 +88,7 @@ export default function NewstList() {
       toastError("Xóa tin thất bại");
     } else {
       console.log(data);
+      setChangeData(!changeData);
       toastSuccess("Xóa tin thành công");
     }
   };
@@ -100,7 +98,7 @@ export default function NewstList() {
       deleted: "0",
     };
     const { data, error } = await supabase
-      .from("projects")
+      .from(tableBase)
       .update(query)
       .eq("id", String(query.id));
     if (error) {
@@ -108,9 +106,13 @@ export default function NewstList() {
       toastError("Khôi phục tin thất bại");
     } else {
       console.log(data);
+      setChangeData(!changeData);
       toastSuccess("Khôi phục tin thành công");
     }
   };
+  if (loading) {
+    return <NextTableLoading />;
+  }
   return (
     <>
       <Table aria-label="Example static collection table">
@@ -144,7 +146,10 @@ export default function NewstList() {
                     className="text-lg text-default-400 cursor-pointer active:opacity-50"
                     onClick={
                       () =>
-                        window.open(`/du-an/${row.keyword}/${row.id}`, "_blank")
+                        window.open(
+                          `/tin-tuc/${row.keywords}/${row.id}`,
+                          "_blank"
+                        )
                       // router.push(`/du-an/${row.keyword}/${row.id}`, undefined, {
                       //   shallow: true
                       // })

@@ -26,39 +26,6 @@ import SliderNewsHome from "@/components/Home/SliderNews";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const list = [
-    {
-      title: "Orange",
-      img: "/11.jpg",
-      price: "$5.50",
-    },
-    {
-      title: "Tangerine",
-      img: "/11.jpg",
-      price: "$3.00",
-    },
-    {
-      title: "Raspberry",
-      img: "/11.jpg",
-      price: "$10.00",
-    },
-    {
-      title: "Lemon",
-      img: "/11.jpg",
-      price: "$5.30",
-    },
-    {
-      title: "Avocado",
-      img: "/11.jpg",
-      price: "$15.70",
-    },
-    {
-      title: "Lemon 2",
-      img: "/11.jpg",
-      price: "$8.00",
-    },
-  ];
-
   return (
     <>
       <Menu />

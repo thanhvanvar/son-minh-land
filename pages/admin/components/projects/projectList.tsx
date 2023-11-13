@@ -14,46 +14,60 @@ import {
 } from "@nextui-org/react";
 import { supabase } from "../../../../lib/supabaseClient";
 import { toastError, toastSuccess } from "../../../../lib/FtGeneral";
+import { handleDeletedData } from "../../../../lib/FtProgress";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Moment from "react-moment";
+import PaginationAdmin from "../PaginationAdmin";
+import NextTableLoading from "@/components/Loading/NextTableLoading";
 
 export default function ProjectList() {
   const router = useRouter();
-  console.log(router);
-  let searchParams = new URLSearchParams(
-    typeof window !== "undefined" ? window.location.search : ""
-  );
+  const tableBase = "projects";
+  const urlAPI_list = "/api/admin/project_admin/projectlist";
+  const urlAPI_list_total = "/api/admin/project_admin/project_total_list";
+  const [loading, setLoading] = useState(true);
+  const [changeData, setChangeData] = useState(false);
+  const [infoList, setInfoList] = useState([]);
+  const [totalList, setTotalList] = useState("0");
 
-  const [page, setPage] = useState(
-    searchParams.get("pa") ? searchParams.get("pa") : "1"
-  );
-  const limit = "10";
-  // @ts-ignore
-  const offset = (page - 1) * limit;
-  const [projectList, setProjectList] = useState([]);
   useEffect(() => {
     const query = {
-      deleted: router.asPath == "/admin/project/deleted" ? "1" : "0",
-      offset: offset,
+      deleted: router.pathname == "/admin/[contentId]/deleted" ? "1" : "0",
     };
-    const urlAPI = `/api/admin/project_admin/projectlist?${queryString.stringify(
-      query
-    )}`;
+    const urlAPI = `${urlAPI_list_total}?${queryString.stringify(query)}`;
     fetch(urlAPI)
       .then((res) => res.json())
       .then((data) => {
-        setProjectList(data);
-        console.log(data);
+        setTotalList(data.length);
+        console.log(data.length);
       });
-  }, [router]);
+  }, []);
+
+  useEffect(() => {
+    setLoading(true)
+    const query = {
+      deleted: router.asPath == "/admin/project/deleted" ? "1" : "0",
+      page: router.query.pa != null ? router.query.pa : "1",
+      limit: "10",
+    };
+    const urlAPI = `${urlAPI_list}?${queryString.stringify(query)}`;
+    fetch(urlAPI)
+      .then((res) => res.json())
+      .then((data) => {
+        setInfoList(data);
+        console.log('project')
+        setLoading(false)
+      });
+  }, [router.asPath, changeData]);
+
   const handleSwitch = async (info: any) => {
     const query = {
       id: info.id,
       active: info.active == "1" ? "0" : "1",
     };
     const { data, error } = await supabase
-      .from("projects")
+      .from(tableBase)
       .update(query)
       .eq("id", String(query.id));
     if (error) {
@@ -64,40 +78,62 @@ export default function ProjectList() {
       toastSuccess("Sửa tin thành công");
     }
   };
-  const handleDeleted = async (info: any) => {
+
+  const handleDeleted = (info: any) => {
     const query = {
       id: info.id,
       deleted: "1",
     };
-    const { data, error } = await supabase
-      .from("projects")
-      .update(query)
-      .eq("id", String(query.id));
-    if (error) {
-      console.log("Error:", error.message);
-      toastError("Xóa tin thất bại");
-    } else {
-      console.log(data);
-      toastSuccess("Xóa tin thành công");
-    }
+    const filterParams = {
+      tableBase: tableBase,
+      obj: query,
+    };
+    fetch("/api/admin/updateDataDelete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ filterParams }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data) {
+          toastError("Xóa tin thất bại");
+        } else {
+          setChangeData(!changeData);
+          toastSuccess("Xóa tin thành công");
+        }
+      });
   };
   const handleRestore = async (info: any) => {
     const query = {
       id: info.id,
       deleted: "0",
     };
-    const { data, error } = await supabase
-      .from("projects")
-      .update(query)
-      .eq("id", String(query.id));
-    if (error) {
-      console.log("Error:", error.message);
-      toastError("Khôi phục tin thất bại");
-    } else {
-      console.log(data);
-      toastSuccess("Khôi phục tin thành công");
-    }
+    const filterParams = {
+      tableBase: tableBase,
+      obj: query,
+    };
+    fetch("/api/admin/updateDataDelete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ filterParams }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data) {
+          toastError("Khôi phục tin thất bại");
+        } else {
+          setChangeData(!changeData);
+          toastSuccess("Khôi phục tin thành công");
+        }
+      });
   };
+  if (loading) {
+    return <NextTableLoading />;
+  }
   return (
     <>
       <Table aria-label="Example static collection table">
@@ -108,9 +144,11 @@ export default function ProjectList() {
           <TableColumn>ACTION</TableColumn>
         </TableHeader>
         <TableBody>
-          {projectList.map((row: any, index) => (
+          {infoList.map((row: any, index) => (
             <TableRow key={index} className="">
-              <TableCell>{row.name_vn}</TableCell>
+              <TableCell>
+                <span className="line-clamp-1">{row.name_vn}</span>
+              </TableCell>
               <TableCell>
                 <Moment format="DD/MM/YYYY">{row.date_added}</Moment>
               </TableCell>
@@ -169,6 +207,7 @@ export default function ProjectList() {
           ))}
         </TableBody>
       </Table>
+      <PaginationAdmin totalData={totalList} />
       <ToastContainer />
     </>
   );

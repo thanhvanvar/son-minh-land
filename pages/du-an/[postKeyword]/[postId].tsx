@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router";
 import queryString from "query-string";
 import Footer from "@/components/Footer";
 import Menu from "@/components/Menu";
 import { Image, Divider } from "@nextui-org/react";
+import getConfig from "next/config";
 
-export default function ProjectDetail() {
+function ProjectDetail() {
   const router = useRouter();
   const [project, setProject]: any = useState([]);
 
@@ -35,7 +36,7 @@ export default function ProjectDetail() {
                 radius="lg"
                 width="100%"
                 alt={""}
-                className="w-full object-cover h-[240px]"
+                className="w-full object-cover h-[240px] md:h-[440px]"
                 src={project.img}
               />
             </div>
@@ -65,7 +66,9 @@ export default function ProjectDetail() {
                 </div>
               </div>
               <div className={`col-span-12`}>
-                <div dangerouslySetInnerHTML={{ __html: project.tongquan_vn }} />
+                <div
+                  dangerouslySetInnerHTML={{ __html: project.tongquan_vn }}
+                />
               </div>
             </div>
           </div>
@@ -183,3 +186,33 @@ export default function ProjectDetail() {
     </>
   );
 }
+
+export const getStaticPaths = async () => {
+  const res = await fetch(
+    "http://localhost:3000/api/projects/projectListGetStaticPath"
+  );
+  const data = await res.json();
+
+  const paths = data.map((row: any) => ({
+    params: {
+      postId: row.id,
+      postType: row.type,
+      postKeyword: row.keyword,
+    },
+  }));
+  return { paths, fallback: "blocking" };
+};
+
+export async function getStaticProps(context: any) {
+  const id = context.params.postId;
+  const res = await fetch(
+    `http://localhost:3000/api/projects/projectListGetStaticPath?id=${id}`
+  );
+  const data = await res.json();
+  return {
+    props: {
+      data,
+    },
+  };
+}
+export default ProjectDetail;

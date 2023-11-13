@@ -73,7 +73,7 @@ export default function NewsDetailAdmin() {
     }
 
     const ojb: any = {
-      id: router.query.postId == '0' ? uuidv4() : router.query.postId,
+      id: router.query.postId == "0" ? uuidv4() : router.query.postId,
       title: name,
       keywords: convertKeyword(name),
       category: "",
@@ -98,7 +98,9 @@ export default function NewsDetailAdmin() {
       delete ojb.date_modified;
       // insertDataTinRao(ojb);
       insertData("press", ojb);
-      router.push(`/admin/${router.query.contentId}`, undefined, { shallow: true });
+      router.push(`/admin/${router.query.contentId}`, undefined, {
+        shallow: true,
+      });
     }
   };
 
@@ -139,6 +141,7 @@ export default function NewsDetailAdmin() {
       }
     }
   }
+
   const handleClickImg = () => {
     // `current` points to the mounted file input element
     if (inputFile.current) {
@@ -152,97 +155,86 @@ export default function NewsDetailAdmin() {
       {!session ? (
         <Login />
       ) : (
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
-          <div className="container mx-auto md:w-[1170px] p-2 md:p-6 ">
-            <div className="grid grid-cols-12 gap-8">
-              <div className={`col-span-4`}>
-                <MenuSidebar />
-              </div>
-              <div className={`col-span-8`}>
-                <Header />
-                <div className="grid grid-cols-12 gap-5">
-                  <div className={`col-span-12`}>
-                    <div className="flex w-full flex-col">
-                      <Tabs aria-label="Options">
-                        <Tab key="thong-tin-chung" title="Thông tin chung">
-                          <div className="grid grid-cols-12 gap-5">
-                            <div className={`col-span-12`}>
-                              <Input
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                type="text"
-                                variant={"flat"}
-                                label="Tên"
-                                name="name"
-                                placeholder="tên bài viết..."
-                                labelPlacement={"outside"}
-                              />
-                            </div>
+        <form id="myForm" onSubmit={handleSubmit} encType="multipart/form-data">
+          <Header />
+          <div className="grid grid-cols-12 gap-5">
+            <div className={`col-span-12`}>
+              <div className="flex w-full flex-col">
+                <Tabs aria-label="Options">
+                  <Tab key="thong-tin-chung" title="Thông tin chung">
+                    <div className="grid grid-cols-12 gap-5">
+                      <div className={`col-span-12`}>
+                        <Input
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          type="text"
+                          variant={"flat"}
+                          label="Tên"
+                          name="name"
+                          placeholder="tên bài viết..."
+                          labelPlacement={"outside"}
+                        />
+                      </div>
 
-                            <div className={`col-span-12`}>
-                              <Textarea
-                                label="Giới thiệu ngắn"
-                                placeholder="Giới thiệu ngắn"
-                                value={info}
-                                labelPlacement="outside"
-                                onChange={(e) => setInfo(e.target.value)}
-                              />
-                            </div>
-                            <div className={`col-span-12`}>
-                              <p className="font-bold text-sm">Hình đại diện</p>
-                              <div className={`flex flex-wrap relative`}>
-                                {/* <Avatar
+                      <div className={`col-span-12`}>
+                        <Textarea
+                          label="Giới thiệu ngắn"
+                          placeholder="Giới thiệu ngắn"
+                          value={info}
+                          labelPlacement="outside"
+                          onChange={(e) => setInfo(e.target.value)}
+                        />
+                      </div>
+                      <div className={`col-span-12`}>
+                        <p className="font-bold text-sm">Hình đại diện</p>
+                        <div className={`flex flex-wrap relative`}>
+                          {/* <Avatar
                                   src={img}
                                   className="w-40 h-40 text-large"
                                   onClick={handleClickImg}
                                 /> */}
-                                <Image
-                                  width={240}
-                                  src={img}
-                                  alt="NextUI Album Cover"
-                                  onClick={handleClickImg}
-                                  className="object-cover w-40 h-40 m-5 text-large cursor-pointer"
-                                />
-                                {img != "/no-image.png" ? (
-                                  <p
-                                    className={`absolute bottom-6 left-6 z-10 cursor-pointer`}
-                                    onClick={() => setImg("/no-image.png")}
-                                  >
-                                    <Icon.XCircleFill
-                                      className={`text-2xl text-green-400 pointer-events-none`}
-                                    />
-                                  </p>
-                                ) : (
-                                  ""
-                                )}
-                              </div>
-                              <input
-                                type="file"
-                                name="myImage"
-                                ref={inputFile}
-                                onChange={(e) => uploadImage(e)}
-                                style={{ display: "none" }}
+                          <Image
+                            width={240}
+                            src={img}
+                            alt="NextUI Album Cover"
+                            onClick={handleClickImg}
+                            className="object-cover w-40 h-40 m-5 text-large cursor-pointer"
+                          />
+                          {img != "/no-image.png" ? (
+                            <p
+                              className={`absolute bottom-6 left-6 z-10 cursor-pointer`}
+                              onClick={() => setImg("/no-image.png")}
+                            >
+                              <Icon.XCircleFill
+                                className={`text-2xl text-green-400 pointer-events-none`}
                               />
-                            </div>
-                          </div>
-                        </Tab>
-                        <Tab key="tong-quan" title="Tổng quan">
-                          <div className="grid grid-cols-12 gap-5">
-                            <div className={`col-span-12`}>
-                              <p className="font-bold text-base py-5">
-                                Nội dung
-                              </p>
-                              <EditorTiny
-                                value={tongquan}
-                                onEditorChange={(e: any) => setTongQuan(e)}
-                              />
-                            </div>
-                          </div>
-                        </Tab>
-                      </Tabs>
+                            </p>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                        <input
+                          type="file"
+                          name="myImage"
+                          ref={inputFile}
+                          onChange={(e) => uploadImage(e)}
+                          style={{ display: "none" }}
+                        />
+                      </div>
                     </div>
-                  </div>
-                </div>
+                  </Tab>
+                  <Tab key="tong-quan" title="Tổng quan">
+                    <div className="grid grid-cols-12 gap-5">
+                      <div className={`col-span-12`}>
+                        <p className="font-bold text-base py-5">Nội dung</p>
+                        <EditorTiny
+                          value={tongquan}
+                          onEditorChange={(e: any) => setTongQuan(e)}
+                        />
+                      </div>
+                    </div>
+                  </Tab>
+                </Tabs>
               </div>
             </div>
           </div>

@@ -4,11 +4,10 @@ export default async function handler(req, res) {
   const { page, limit } = req.query;
 
   try {
-    // const offset = (req.query.page - 1) * limit;
     const { data, error } = await supabase
       .from("press")
       .select(`*`)
-      .range((page - 1) * limit, ((page - 1) * limit) + 9)
+      .range((page - 1) * limit, (page - 1) * limit + 9)
       .eq("deleted", req.query.deleted)
       .order("date_added", { ascending: false });
     if (error) {
