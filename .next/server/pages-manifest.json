@@ -3,6 +3,16 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/du-an": "pages/du-an.js",
-  "/api/projects/projectDetail": "pages/api/projects/projectDetail.js",
-  "/du-an/[postKeyword]/[postId]": "pages/du-an/[postKeyword]/[postId].js"
+  "/du-an/[postKeyword]/[postId]": "pages/du-an/[postKeyword]/[postId].js",
+  "/tin-tuc": "pages/tin-tuc.js",
+  "/api/projects/projectList": "pages/api/projects/projectList.js",
+  "/api/news/newsListRelated": "pages/api/news/newsListRelated.js",
+  "/api/news/newsListTotal": "pages/api/news/newsListTotal.js",
+  "/api/news/newsList": "pages/api/news/newsList.js",
+  "/tin-tuc/[postKeyword]/[postId]": "pages/tin-tuc/[postKeyword]/[postId].js",
+  "/api/news/newsDetail": "pages/api/news/newsDetail.js",
+  "/ve-chung-toi": "pages/ve-chung-toi.js",
+  "/": "pages/index.js",
+  "/api/projects/projectListHome": "pages/api/projects/projectListHome.js",
+  "/api/news/newsListHome": "pages/api/news/newsListHome.js"
 }
