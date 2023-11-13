@@ -39,7 +39,7 @@ export default function HeaderAdmin() {
           {router.query.postId ? (
             <div className="flex gap-4 justify-end">
               <Button color="success" type="submit">
-                Cập nhật
+                <span className="text-white">Cập nhật</span>
               </Button>
               <Button
                 color="danger"
@@ -66,7 +66,7 @@ export default function HeaderAdmin() {
                   )
                 }
               >
-                Thêm
+                <span className="text-white">Thêm</span>
               </Button>
               <Button
                 color="danger"
@@ -80,7 +80,7 @@ export default function HeaderAdmin() {
                   )
                 }
               >
-                Xóa
+                Đã xóa
               </Button>
             </div>
           )}

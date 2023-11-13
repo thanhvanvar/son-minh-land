@@ -2,16 +2,12 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/tin-tuc": "pages/tin-tuc.js",
-  "/api/news/newsList": "pages/api/news/newsList.js",
-  "/api/news/newsListRelated": "pages/api/news/newsListRelated.js",
-  "/du-an": "pages/du-an.js",
-  "/tin-tuc/[postKeyword]/[postId]": "pages/tin-tuc/[postKeyword]/[postId].js",
-  "/api/projects/projectList": "pages/api/projects/projectList.js",
-  "/api/news/newsDetail": "pages/api/news/newsDetail.js",
-  "/api/news/newsListHome": "pages/api/news/newsListHome.js",
-  "/api/projects/projectListHome": "pages/api/projects/projectListHome.js",
   "/": "pages/index.js",
-  "/ve-chung-toi": "pages/ve-chung-toi.js",
-  "/api/news/newsListTotal": "pages/api/news/newsListTotal.js"
+  "/admin/[contentId]/edit/[postId]": "pages/admin/[contentId]/edit/[postId].js",
+  "/admin/[contentId]": "pages/admin/[contentId].js",
+  "/api/news/newsDetail": "pages/api/news/newsDetail.js",
+  "/api/admin/project_admin/projectlist": "pages/api/admin/project_admin/projectlist.js",
+  "/api/admin/project_admin/project_total_list": "pages/api/admin/project_admin/project_total_list.js",
+  "/api/admin/user/profileDetail": "pages/api/admin/user/profileDetail.js",
+  "/api/projects/projectDetail": "pages/api/projects/projectDetail.js"
 }

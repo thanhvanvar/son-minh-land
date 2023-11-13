@@ -59,14 +59,15 @@ export default function Project() {
                   <CardBody className="overflow-visible py-2">
                     <h4
                       className="font-bold text-large cursor-pointer"
-                      onClick={() =>
+                      onClick={() =>{
+                        setLoading(true)
                         router.push(
                           `/du-an/${row.keyword}/${row.id}`,
                           undefined,
                           {
                             shallow: true,
                           }
-                        )
+                        )}
                       }
                     >
                       {row.name_vn}

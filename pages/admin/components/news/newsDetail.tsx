@@ -171,7 +171,7 @@ export default function NewsDetailAdmin() {
                           variant={"flat"}
                           label="Tên"
                           name="name"
-                          placeholder="tên bài viết..."
+                          placeholder="Tên bài viết..."
                           labelPlacement={"outside"}
                         />
                       </div>
@@ -179,7 +179,7 @@ export default function NewsDetailAdmin() {
                       <div className={`col-span-12`}>
                         <Textarea
                           label="Giới thiệu ngắn"
-                          placeholder="Giới thiệu ngắn"
+                          placeholder="Giới thiệu ngắn..."
                           value={info}
                           labelPlacement="outside"
                           onChange={(e) => setInfo(e.target.value)}
@@ -198,7 +198,7 @@ export default function NewsDetailAdmin() {
                             src={img}
                             alt="NextUI Album Cover"
                             onClick={handleClickImg}
-                            className="object-cover w-40 h-40 m-5 text-large cursor-pointer"
+                            className="object-cover w-40 h-40 mt-5 text-large cursor-pointer"
                           />
                           {img != "/no-image.png" ? (
                             <p

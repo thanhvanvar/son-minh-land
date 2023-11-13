@@ -77,15 +77,16 @@ export default function Project() {
                       <CardBody className="overflow-visible py-2">
                         <h4
                           className="font-bold md:text-large text-base line-clamp-2 cursor-pointer"
-                          onClick={() =>
+                          onClick={() => {
+                            setLoading(true);
                             router.push(
                               `/tin-tuc/${row.keywords}/${row.id}`,
                               undefined,
                               {
                                 shallow: true,
                               }
-                            )
-                          }
+                            );
+                          }}
                         >
                           {row.title}
                         </h4>

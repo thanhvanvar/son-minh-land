@@ -210,7 +210,7 @@ export default function ProjectDetailAdmin() {
                           onChange={(e) => setName(e.target.value)}
                           type="text"
                           variant={"flat"}
-                          label="Name"
+                          label="Tên"
                           name="name"
                           placeholder="tên dự án..."
                           labelPlacement={"outside"}
@@ -223,7 +223,7 @@ export default function ProjectDetailAdmin() {
                           type="text"
                           variant={"flat"}
                           name="address"
-                          label="Address"
+                          label="Địa chỉ"
                           placeholder="địa chỉ dự án..."
                           labelPlacement={"outside"}
                         />
@@ -253,7 +253,7 @@ export default function ProjectDetailAdmin() {
                             src={img}
                             alt="NextUI Album Cover"
                             onClick={handleClickImg}
-                            className="w-40 h-40 m-5 text-large cursor-pointer"
+                            className="w-40 h-40 mt-5 text-large cursor-pointer"
                           />
                           {img != "/no-image.png" ? (
                             <p
