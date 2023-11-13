@@ -253,7 +253,7 @@ export default function ProjectDetailAdmin() {
                             src={img}
                             alt="NextUI Album Cover"
                             onClick={handleClickImg}
-                            className="w-40 h-40 mt-5 text-large cursor-pointer"
+                            className=" object-cover w-40 h-40 mt-5 text-large cursor-pointer"
                           />
                           {img != "/no-image.png" ? (
                             <p

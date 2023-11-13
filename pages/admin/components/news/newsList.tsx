@@ -11,6 +11,7 @@ import {
   TableRow,
   TableCell,
   Switch,
+  Image,
 } from "@nextui-org/react";
 import { supabase } from "../../../../lib/supabaseClient";
 import { toastError, toastSuccess } from "../../../../lib/FtGeneral";
@@ -117,6 +118,7 @@ export default function NewstList() {
     <>
       <Table aria-label="Example static collection table">
         <TableHeader>
+          <TableColumn>#</TableColumn>
           <TableColumn>NAME</TableColumn>
           <TableColumn>Ngày đăng</TableColumn>
           <TableColumn>Ẩn/Hiện</TableColumn>
@@ -124,9 +126,17 @@ export default function NewstList() {
         </TableHeader>
         <TableBody>
           {infoList.map((row: any, index) => (
-            <TableRow key={index} className="">
+            <TableRow key={row.id} className="border-b-1 border-dashed ">
               <TableCell>
-                <span className="line-clamp-1">{row.title}</span>
+                <Image
+                  width={80}
+                  src={row.image_url}
+                  alt={row.keywords}
+                  className="object-cover w-[80px] h-[40px] cursor-pointer"
+                />
+              </TableCell>
+              <TableCell>
+                <span className="line-clamp-2">{row.title}</span>
               </TableCell>
               <TableCell>
                 <Moment format="DD/MM/YYYY">{row.date_added}</Moment>

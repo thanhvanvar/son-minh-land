@@ -11,6 +11,8 @@ import {
   TableRow,
   TableCell,
   Switch,
+  Image,
+  Divider,
 } from "@nextui-org/react";
 import { supabase } from "../../../../lib/supabaseClient";
 import { toastError, toastSuccess } from "../../../../lib/FtGeneral";
@@ -45,7 +47,7 @@ export default function ProjectList() {
   }, []);
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     const query = {
       deleted: router.asPath == "/admin/project/deleted" ? "1" : "0",
       page: router.query.pa != null ? router.query.pa : "1",
@@ -56,8 +58,8 @@ export default function ProjectList() {
       .then((res) => res.json())
       .then((data) => {
         setInfoList(data);
-        console.log('project')
-        setLoading(false)
+        console.log("project");
+        setLoading(false);
       });
   }, [router.asPath, changeData]);
 
@@ -145,9 +147,21 @@ export default function ProjectList() {
         </TableHeader>
         <TableBody>
           {infoList.map((row: any, index) => (
-            <TableRow key={index} className="">
+            <TableRow key={index} className="border-b-1 border-dashed ">
               <TableCell>
-                <span className="line-clamp-1">{row.name_vn}</span>
+                <div className="flex justify-start gap-5 items-center">
+                  <div className="align-items">
+                    <Image
+                      width={80}
+                      src={row.img}
+                      alt="NextUI Album Cover"
+                      className="object-cover w-10 h-10 text-large cursor-pointer"
+                    />
+                  </div>
+                  <div>
+                    <span className="line-clamp-1">{row.name_vn}</span>
+                  </div>
+                </div>
               </TableCell>
               <TableCell>
                 <Moment format="DD/MM/YYYY">{row.date_added}</Moment>
