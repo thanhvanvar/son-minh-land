@@ -32,11 +32,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/du-an.js"
     ],
-    "/du-an/[postKeyword]/[postId]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/du-an/[postKeyword]/[postId].js"
-    ],
     "/tin-tuc": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

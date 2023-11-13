@@ -79,7 +79,7 @@ export default function Project() {
                           className="font-bold md:text-large text-base line-clamp-2 cursor-pointer"
                           onClick={() =>
                             router.push(
-                              `/tin-tuc/${row.keyword}/${row.id}`,
+                              `/tin-tuc/${row.keywords}/${row.id}`,
                               undefined,
                               {
                                 shallow: true,
