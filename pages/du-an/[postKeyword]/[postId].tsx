@@ -187,10 +187,10 @@ function ProjectDetail() {
   );
 }
 
+const { publicRuntimeConfig } = getConfig();
 export const getStaticPaths = async () => {
-  const res = await fetch(
-    "http://localhost:3000/api/projects/projectListGetStaticPath"
-  );
+  const apiUrl = publicRuntimeConfig.apiUrl;
+  const res = await fetch(`${apiUrl}/api/projects/projectListGetStaticPath`);
   const data = await res.json();
 
   const paths = data.map((row: any) => ({
@@ -204,9 +204,10 @@ export const getStaticPaths = async () => {
 };
 
 export async function getStaticProps(context: any) {
+  const apiUrl = publicRuntimeConfig.apiUrl;
   const id = context.params.postId;
   const res = await fetch(
-    `http://localhost:3000/api/projects/projectListGetStaticPath?id=${id}`
+    `${apiUrl}/api/projects/projectListGetStaticPath?id=${id}`
   );
   const data = await res.json();
   return {

@@ -12,6 +12,9 @@ const nextConfig = {
             },
         ],
     },
+    publicRuntimeConfig: {
+        apiUrl: 'https://son-minh-land.vercel.app/',
+      },
 }
 
 module.exports = nextConfig
