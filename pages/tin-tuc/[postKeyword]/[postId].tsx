@@ -16,20 +16,20 @@ const options = {
 };
 export default function NewsDetail({ row }: any) {
   const router = useRouter();
-  const [dataList, setDataList]: any = useState([]);
+  // const [dataList, setDataList]: any = useState([]);
 
-  useEffect(() => {
-    const query = {
-      id: router.query.postId,
-    };
-    const urlAPI = `/api/news/newsDetail?${queryString.stringify(query)}`;
-    fetch(urlAPI)
-      .then((res) => res.json())
-      .then((data) => {
-        setDataList(data);
-        console.log(data);
-      });
-  }, [router.query.postId]);
+  // useEffect(() => {
+  //   const query = {
+  //     id: router.query.postId,
+  //   };
+  //   const urlAPI = `/api/news/newsDetail?${queryString.stringify(query)}`;
+  //   fetch(urlAPI)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setDataList(data);
+  //       console.log(data);
+  //     });
+  // }, [router.query.postId]);
   return (
     <>
       <Menu />
@@ -95,7 +95,6 @@ export const getStaticPaths = async () => {
     const paths = row.map((row: any) => ({
       params: {
         postId: row.id,
-        postType: row.type,
         postKeyword: row.keywords,
       },
     }));

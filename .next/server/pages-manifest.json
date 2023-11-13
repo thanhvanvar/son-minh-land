@@ -4,10 +4,10 @@
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
   "/admin/[contentId]/edit/[postId]": "pages/admin/[contentId]/edit/[postId].js",
-  "/admin/[contentId]": "pages/admin/[contentId].js",
+  "/tin-tuc": "pages/tin-tuc.js",
+  "/api/news/newsListTotal": "pages/api/news/newsListTotal.js",
+  "/api/news/newsListRelated": "pages/api/news/newsListRelated.js",
   "/api/news/newsDetail": "pages/api/news/newsDetail.js",
-  "/api/admin/project_admin/projectlist": "pages/api/admin/project_admin/projectlist.js",
-  "/api/admin/project_admin/project_total_list": "pages/api/admin/project_admin/project_total_list.js",
-  "/api/admin/user/profileDetail": "pages/api/admin/user/profileDetail.js",
-  "/api/projects/projectDetail": "pages/api/projects/projectDetail.js"
+  "/api/news/newsList": "pages/api/news/newsList.js",
+  "/tin-tuc/[postKeyword]/[postId]": "pages/tin-tuc/[postKeyword]/[postId].js"
 }
