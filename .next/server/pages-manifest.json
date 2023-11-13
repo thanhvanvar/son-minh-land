@@ -1,1 +1,8 @@
-{}
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/du-an": "pages/du-an.js",
+  "/api/projects/projectDetail": "pages/api/projects/projectDetail.js",
+  "/du-an/[postKeyword]/[postId]": "pages/du-an/[postKeyword]/[postId].js"
+}

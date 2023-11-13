@@ -5,10 +5,13 @@ import Footer from "@/components/Footer";
 import Menu from "@/components/Menu";
 import { Image, Divider } from "@nextui-org/react";
 import getConfig from "next/config";
+import { fetchData_project } from "@/lib/FtProgress";
+import { supabase } from "../../../lib/supabaseClient";
 
 function ProjectDetail() {
   const router = useRouter();
   const [project, setProject]: any = useState([]);
+  console.log(fetchData_project);
 
   useEffect(() => {
     const query = {
@@ -187,32 +190,46 @@ function ProjectDetail() {
   );
 }
 
-const { publicRuntimeConfig } = getConfig();
 export const getStaticPaths = async () => {
-  const apiUrl = publicRuntimeConfig.apiUrl;
-  const res = await fetch(`${apiUrl}/api/projects/projectListGetStaticPath`);
-  const data = await res.json();
-
-  const paths = data.map((row: any) => ({
-    params: {
-      postId: row.id,
-      postType: row.type,
-      postKeyword: row.keyword,
-    },
-  }));
-  return { paths, fallback: "blocking" };
+  let { data: projects, error } = await supabase
+    .from("projects")
+    .select("*")
+    .eq("active", "1")
+    .eq("deleted", "0")
+    .order("date_added", { ascending: false })
+    .range(0, 7);
+  if (error) {
+    console.log("Error:", error.message);
+  } else {
+    console.log("Success:", "ok");
+  }
+  if (projects) {
+    const paths = projects.map((row: any) => ({
+      params: {
+        postId: row.id,
+        postType: row.type,
+        postKeyword: row.keyword,
+      },
+    }));
+    return { paths, fallback: "blocking" };
+  }
 };
 
 export async function getStaticProps(context: any) {
-  const apiUrl = publicRuntimeConfig.apiUrl;
   const id = context.params.postId;
-  const res = await fetch(
-    `${apiUrl}/api/projects/projectListGetStaticPath?id=${id}`
-  );
-  const data = await res.json();
+  let { data: projects, error } = await supabase
+    .from("projects")
+    .select(`*`)
+    .eq("id", id)
+    .single();
+  if (error) {
+    console.log("Error:", error.message);
+  } else {
+    console.log("Success:", "ok");
+  }
   return {
     props: {
-      data,
+      projects,
     },
   };
 }
