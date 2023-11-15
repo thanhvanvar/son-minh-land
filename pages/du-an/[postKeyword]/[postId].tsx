@@ -7,10 +7,40 @@ import { Image, Divider } from "@nextui-org/react";
 import getConfig from "next/config";
 import { fetchData_project } from "@/lib/FtProgress";
 import { supabase } from "../../../lib/supabaseClient";
+import Head from "next/head";
 
 function ProjectDetail({ projects }: any) {
   return (
     <>
+      <Head>
+        <title>{projects.name_vn}</title>
+        <meta property="og:site_name" content={`${projects.name_vn}`} />
+        <meta
+          property="og:url"
+          content={`${
+            typeof window !== "undefined" ? window.location.href : ""
+          }`}
+        />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={`${projects.name_vn}`} />
+        <meta
+          property="og:description"
+          content={`${projects.info_vn.replace(/<[^>]*>?/gm, "").substring(
+            0,
+            160
+          )}...`}
+        />
+        <meta
+          name="description"
+          content={`${projects.info_vn.replace(/<[^>]*>?/gm, "").substring(
+            0,
+            160
+          )}...`}
+        />
+        <meta property="og:image" content={`${projects.img}`} />
+        <meta property="twitter:image" content={`${projects.img}`} />
+        <meta property="twitter:card" content="summary_large_image" />
+      </Head>
       <Menu />
       <div className="bg-[#ffffff]">
         <div className="container mx-auto md:w-[1170px] p-4 md:p-6 ">

@@ -47,7 +47,7 @@ export default function Project() {
           <div className="grid grid-cols-12 gap-8">
             {projectList.map((row: any, index) => (
               <div className="md:col-span-4 col-span-12" key={index}>
-                <Card>
+                <Card isPressable>
                   <CardHeader className="p-0 flex-col items-start">
                     <Image
                       alt="Card background"

@@ -70,17 +70,24 @@ export default function HeaderAdmin() {
               </Button>
               <Button
                 color="danger"
-                onClick={() =>
-                  router.push(
-                    `/admin/${router.query.contentId}/deleted`,
+                onClick={() => {
+                  router.query.del=='1'?router.push(
+                    `/admin/${router.query.contentId}`,
+                    undefined,
+                    {
+                      shallow: true,
+                    }
+                  ):router.push(
+                    `/admin/${router.query.contentId}?del=1`,
                     undefined,
                     {
                       shallow: true,
                     }
                   )
-                }
+                  ;
+                }}
               >
-                Đã xóa
+                {router.query.del=='1'?'Quay lại':' Đã xóa'}
               </Button>
             </div>
           )}

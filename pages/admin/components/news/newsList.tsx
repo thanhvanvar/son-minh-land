@@ -12,6 +12,7 @@ import {
   TableCell,
   Switch,
   Image,
+  Avatar,
 } from "@nextui-org/react";
 import { supabase } from "../../../../lib/supabaseClient";
 import { toastError, toastSuccess } from "../../../../lib/FtGeneral";
@@ -32,7 +33,7 @@ export default function NewstList() {
   const [totalList, setTotalList] = useState("0");
   useEffect(() => {
     const query = {
-      deleted: router.pathname == "/admin/[contentId]/deleted" ? "1" : "0",
+      deleted: router.query.del == "1" ? "1" : "0",
     };
     const urlAPI = `${urlAPI_list_total}?${queryString.stringify(query)}`;
     fetch(urlAPI)
@@ -40,11 +41,13 @@ export default function NewstList() {
       .then((data) => {
         setTotalList(data.length);
       });
-  }, []);
+  }, [router.asPath, changeData]);
+
   useEffect(() => {
     setLoading(true);
     const query = {
-      deleted: router.asPath == "/admin/news/deleted" ? "1" : "0",
+      // deleted: router.asPath == "/admin/news/deleted" ? "1" : "0",
+      deleted: router.query.del == "1" ? "1" : "0",
       page: router.query.pa != null ? router.query.pa : "1",
       limit: "10",
     };
@@ -52,7 +55,6 @@ export default function NewstList() {
     fetch(urlAPI)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setInfoList(data);
         setLoading(false);
       });
@@ -126,13 +128,12 @@ export default function NewstList() {
         </TableHeader>
         <TableBody>
           {infoList.map((row: any, index) => (
-            <TableRow key={row.id} className="border-b-1 border-dashed ">
+            <TableRow key={row.id} className="border-b-1 border-dashed">
               <TableCell>
-                <Image
-                  width={80}
+                <Avatar
                   src={row.image_url}
-                  alt={row.keywords}
-                  className="object-cover w-[80px] h-[40px] cursor-pointer"
+                  radius="sm"
+                  className="w-12 h-12 text-large"
                 />
               </TableCell>
               <TableCell>
@@ -146,9 +147,7 @@ export default function NewstList() {
                   defaultSelected={row.active == "1" ? true : false}
                   size="sm"
                   onChange={(e) => handleSwitch(row)}
-                >
-                  {/* {row.active == "1" ? "Hiện" : "Ẩn"} */}
-                </Switch>
+                ></Switch>
               </TableCell>
               <TableCell>
                 <div className="relative flex items-center gap-3">
@@ -178,7 +177,7 @@ export default function NewstList() {
                   >
                     <Icon.PencilSquare size={23} />
                   </span>
-                  {router.pathname == "/admin/[contentId]/deleted" ? (
+                  {router.query.del == "1" ? (
                     <span
                       className="text-lg text-danger cursor-pointer active:opacity-50"
                       onClick={(e) => handleRestore(row)}

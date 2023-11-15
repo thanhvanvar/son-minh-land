@@ -13,6 +13,7 @@ import {
   Switch,
   Image,
   Divider,
+  Avatar
 } from "@nextui-org/react";
 import { supabase } from "../../../../lib/supabaseClient";
 import { toastError, toastSuccess } from "../../../../lib/FtGeneral";
@@ -35,21 +36,20 @@ export default function ProjectList() {
 
   useEffect(() => {
     const query = {
-      deleted: router.pathname == "/admin/[contentId]/deleted" ? "1" : "0",
+      deleted: router.query.del == "1" ? "1" : "0",
     };
     const urlAPI = `${urlAPI_list_total}?${queryString.stringify(query)}`;
     fetch(urlAPI)
       .then((res) => res.json())
       .then((data) => {
         setTotalList(data.length);
-        console.log(data.length);
       });
-  }, []);
+  }, [router.asPath]);
 
   useEffect(() => {
     setLoading(true);
     const query = {
-      deleted: router.asPath == "/admin/project/deleted" ? "1" : "0",
+      deleted: router.query.del == "1" ? "1" : "0",
       page: router.query.pa != null ? router.query.pa : "1",
       limit: "10",
     };
@@ -151,12 +151,13 @@ export default function ProjectList() {
               <TableCell>
                 <div className="flex justify-start gap-5 items-center">
                   <div className="align-items">
-                    <Image
+                  <Avatar src={row.img} radius="sm" className="w-12 h-12 text-large" />
+                    {/* <Image
                       width={80}
                       src={row.img}
                       alt="NextUI Album Cover"
                       className="object-cover w-10 h-10 text-large cursor-pointer"
-                    />
+                    /> */}
                   </div>
                   <div>
                     <span className="line-clamp-1">{row.name_vn}</span>
@@ -200,7 +201,7 @@ export default function ProjectList() {
                   >
                     <Icon.PencilSquare size={23} />
                   </span>
-                  {router.pathname == "/admin/[contentId]/deleted" ? (
+                  {router.query.del=='1' ? (
                     <span
                       className="text-lg text-danger cursor-pointer active:opacity-50"
                       onClick={(e) => handleRestore(row)}

@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import queryString from "query-string";
 import MenuSidebar from "../../MenuSidebar";
 import * as Icon from "react-bootstrap-icons";
-import { Input, Image, Tabs, Tab, Textarea } from "@nextui-org/react";
+import { Input, Image, Tabs, Tab, Textarea, Badge } from "@nextui-org/react";
 import {
   toastError,
   toastSuccess,
@@ -109,8 +109,8 @@ export default function NewsDetailAdmin() {
     let file = e.target.files;
     for (let i = 0; i < file.length; i++) {
       let checkFile = true;
-      if (e.target.files[i].size > 5000 * 1024) {
-        toastError(`Hình ${e.target.files[i].name} không được quá 5 MB`);
+      if (e.target.files[i].size > 1000 * 1024) {
+        toastError(`Hình ${e.target.files[i].name} không được quá 1 MB`);
         checkFile = false;
       }
       if (
@@ -193,25 +193,28 @@ export default function NewsDetailAdmin() {
                                   className="w-40 h-40 text-large"
                                   onClick={handleClickImg}
                                 /> */}
-                          <Image
-                            width={240}
-                            src={img}
-                            alt="NextUI Album Cover"
-                            onClick={handleClickImg}
-                            className="object-cover w-40 h-40 mt-5 text-large cursor-pointer"
-                          />
-                          {img != "/no-image.png" ? (
-                            <p
-                              className={`absolute bottom-6 left-6 z-10 cursor-pointer`}
-                              onClick={() => setImg("/no-image.png")}
-                            >
+                          <Badge
+                            isOneChar
+                            isInvisible={img != "/no-image.png" ? false : true}
+                            content={
                               <Icon.XCircleFill
-                                className={`text-2xl text-green-400 pointer-events-none`}
+                                className={`text-2xl  pointer-events-none`}
                               />
-                            </p>
-                          ) : (
-                            ""
-                          )}
+                            }
+                            size="lg"
+                            color="primary"
+                            shape="circle"
+                            placement="top-right"
+                            onClick={() => setImg("/no-image.png")}
+                          >
+                            <Image
+                              width={240}
+                              src={img}
+                              alt="NextUI Album Cover"
+                              onClick={handleClickImg}
+                              className="object-cover w-40 h-40 text-large cursor-pointer"
+                            />
+                          </Badge>
                         </div>
                         <input
                           type="file"

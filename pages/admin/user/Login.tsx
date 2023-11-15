@@ -5,7 +5,7 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 export default function Login() {
   const supabase = useSupabaseClient();
-  
+
   return (
     <>
       <div className="container mx-auto md:w-[1170px] p-2 md:p-6 justify-center ">
@@ -51,7 +51,7 @@ export default function Login() {
                     },
                   },
                 }}
-              />
+              ></Auth>
             </div>
           </div>
         </div>

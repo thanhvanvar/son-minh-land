@@ -6,15 +6,13 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useSupabaseClient, useSession } from "@supabase/auth-helpers-react";
 
 import {
-  Divider,
   Accordion,
   AccordionItem,
-  User,
+
   Avatar,
   Listbox,
   ListboxItem,
-  ListboxSection,
-  cn,
+ 
 } from "@nextui-org/react";
 
 import * as Icon from "react-bootstrap-icons";
@@ -58,6 +56,7 @@ export default function MenuSidebar() {
       >
         <AccordionItem
           key="1"
+          textValue="avatar"
           aria-label={userName}
           startContent={
             <Avatar
@@ -70,23 +69,24 @@ export default function MenuSidebar() {
           subtitle={userEmail}
           title={userName}
         >
-          {/* <Divider /> */}
           <Listbox aria-label="Actions">
-            <ListboxItem
-              key="new"
+            {/* <ListboxItem
+              key="thiet-lap-tai-khoan"
+              textValue="thiet-lap-tai-khoan"
               endContent={<Icon.CaretRightFill size={13} />}
               startContent={<Icon.Gear size={20} />}
-              onClick={() =>
+              showDivider
+              onPress={() =>
                 router.push("/admin/project", undefined, {
                   shallow: true,
                 })
               }
-              showDivider
             >
               <span className="text-base">Thiết lập tài khoản</span>
-            </ListboxItem>
+            </ListboxItem> */}
             <ListboxItem
-              key="new"
+              key="logout"
+              textValue="logout"
               endContent={<Icon.CaretRightFill size={13} />}
               startContent={<Icon.BoxArrowRight size={20} />}
               onClick={() => handleLogout()}
@@ -98,12 +98,14 @@ export default function MenuSidebar() {
         </AccordionItem>
         <AccordionItem
           key="2"
+          textValue="quan-ly"
           aria-label="Quản lý"
           title={<span className="font-bold text-base uppercase">Quản lý</span>}
         >
           <Listbox aria-label="Actions">
             <ListboxItem
               key="du-an"
+              textValue="du-an"
               endContent={<Icon.CaretRightFill size={13} />}
               startContent={<Icon.Gear size={20} />}
               onClick={() =>
@@ -117,6 +119,7 @@ export default function MenuSidebar() {
             </ListboxItem>
             <ListboxItem
               key="tin-tuc"
+              textValue="tin-tuc"
               endContent={<Icon.CaretRightFill size={13} />}
               startContent={<Icon.BoxArrowRight size={20} />}
               onClick={() =>
@@ -124,7 +127,6 @@ export default function MenuSidebar() {
                   shallow: true,
                 })
               }
-              
             >
               <span className="text-base">Tin tức</span>
             </ListboxItem>

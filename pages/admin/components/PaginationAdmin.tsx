@@ -28,7 +28,7 @@ export default function PaginationAdmin(props: any) {
             t: router.query.t ? router.query.t : undefined,
             h: router.query.h ? router.query.h : undefined,
             s: router.query.s ? router.query.s : undefined,
-            sta: router.query.sta ? router.query.sta : undefined,
+            del: router.query.del ? router.query.del : undefined,
             pa: e,
           }),
         },
