@@ -1,37 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import queryString from "query-string";
+import React from "react";
 import Footer from "@/components/Footer";
-
 import Menu from "@/components/Menu";
-import { Image, Divider, Card, CardBody, CardHeader } from "@nextui-org/react";
-import parse from "html-react-parser";
+import { Image, Card, CardBody, CardHeader } from "@nextui-org/react";
 import RelatedNews from "@/components/news/RelatedNews";
 import Moment from "react-moment";
 import { supabase } from "../../../lib/supabaseClient";
-const { convert } = require("html-to-text");
-const options = {
-  wordwrap: 130,
-  // ...
-};
+import HeaderTag from "@/components/HeaderTag";
 export default function NewsDetail({ row }: any) {
-  const router = useRouter();
-  // const [dataList, setDataList]: any = useState([]);
-
-  // useEffect(() => {
-  //   const query = {
-  //     id: router.query.postId,
-  //   };
-  //   const urlAPI = `/api/news/newsDetail?${queryString.stringify(query)}`;
-  //   fetch(urlAPI)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setDataList(data);
-  //       console.log(data);
-  //     });
-  // }, [router.query.postId]);
   return (
     <>
+      <HeaderTag
+        title={row.title}
+        name={row.title}
+        info={row.description}
+        img={row.image_url}
+      />
       <Menu />
       <div className="bg-[#ffffff]">
         <div className="container mx-auto md:w-[1170px] p-2 md:p-6 ">

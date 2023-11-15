@@ -32,10 +32,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/du-an.js"
     ],
-    "/du-an/[postKeyword]/[postId]": [
+    "/tin-tuc": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/du-an/[postKeyword]/[postId].js"
+      "static/chunks/pages/tin-tuc.js"
+    ],
+    "/tin-tuc/[postKeyword]/[postId]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/tin-tuc/[postKeyword]/[postId].js"
     ]
   },
   "ampFirstPages": []

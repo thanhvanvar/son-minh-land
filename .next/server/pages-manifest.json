@@ -4,6 +4,9 @@
   "/_document": "pages/_document.js",
   "/admin/[contentId]": "pages/admin/[contentId].js",
   "/du-an": "pages/du-an.js",
-  "/du-an/[postKeyword]/[postId]": "pages/du-an/[postKeyword]/[postId].js",
-  "/api/projects/projectList": "pages/api/projects/projectList.js"
+  "/api/news/newsListRelated": "pages/api/news/newsListRelated.js",
+  "/tin-tuc": "pages/tin-tuc.js",
+  "/api/news/newsListTotal": "pages/api/news/newsListTotal.js",
+  "/api/news/newsList": "pages/api/news/newsList.js",
+  "/tin-tuc/[postKeyword]/[postId]": "pages/tin-tuc/[postKeyword]/[postId].js"
 }
